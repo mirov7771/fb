@@ -23,4 +23,9 @@ public class FBController {
         return null;
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/")
+    public String check(){
+        return "Application is running";
+    }
+
 }
