@@ -2,6 +2,7 @@ package ru.foodbooking.foodws.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.foodbooking.foodws.FBException;
 import ru.foodbooking.foodws.services.FBServices;
 import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
@@ -17,7 +18,7 @@ public class FBController {
     @RequestMapping(method = RequestMethod.GET, value = "/fb")
     @ResponseBody
     public FBServicesRes handleRequest(@RequestParam("method") String method,
-                                       @RequestBody FBServicesReq req) throws Exception {
+                                       @RequestBody FBServicesReq req) throws FBException {
         FBServices service = fbServices.get(method);
         service.execute(null);
         return null;

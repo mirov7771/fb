@@ -1,7 +1,9 @@
 package ru.foodbooking.foodws.services;
 
+import ru.foodbooking.foodws.FBException;
+
 public interface FBServices {
 
-    String execute(String request) throws Exception;
+    String execute(String request) throws FBException;
 
 }
