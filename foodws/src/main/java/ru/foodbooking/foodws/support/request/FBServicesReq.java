@@ -1,10 +1,18 @@
 package ru.foodbooking.foodws.support.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class FBServicesReq {
 
+    @JsonProperty("pointid")
     private Long pointId;
+    @JsonProperty("address")
     private String address;
+    @JsonProperty("ctgrid")
     private Long ctgrId;
+    @JsonProperty("productid")
     private Long productId;
 
     public void setPointId(Long pointId) {
