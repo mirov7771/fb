@@ -16,6 +16,8 @@ public class TCategories {
     private String ctgrName;
     @JsonProperty("ctgrlogo")
     private String ctgrLogo;
+    @JsonProperty("description")
+    private String description;
 
     public Long getPointId() {
         return pointId;
@@ -57,4 +59,11 @@ public class TCategories {
         this.ctgrLogo = ctgrLogo;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

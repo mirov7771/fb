@@ -72,4 +72,12 @@ public class Categories {
     public void setProductsList(List<Products> productsList) {
         this.productsList = productsList;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

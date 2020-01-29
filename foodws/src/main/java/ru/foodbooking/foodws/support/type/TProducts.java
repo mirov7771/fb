@@ -3,6 +3,8 @@ package ru.foodbooking.foodws.support.type;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TProducts {
 
@@ -16,6 +18,10 @@ public class TProducts {
     private String prdName;
     @JsonProperty("prdlogo")
     private String prdLogo;
+    @JsonProperty("description")
+    private String description;
+    @JsonProperty ("cost")
+    private BigDecimal cost;
 
     public Long getCtgrId() {
         return ctgrId;
@@ -57,4 +63,19 @@ public class TProducts {
         this.prdLogo = prdLogo;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
+    }
 }

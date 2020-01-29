@@ -1,6 +1,7 @@
 package ru.foodbooking.foodws.dao.model;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "FB_PRODUCTS")
@@ -20,6 +21,8 @@ public class Products {
     private String prdLogo;
     @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "COST")
+    private BigDecimal cost;
 
     public Long getPrdId() {
         return prdId;
@@ -59,5 +62,21 @@ public class Products {
 
     public void setPrdLogo(String prdLogo) {
         this.prdLogo = prdLogo;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public BigDecimal getCost() {
+        return cost;
+    }
+
+    public void setCost(BigDecimal cost) {
+        this.cost = cost;
     }
 }
