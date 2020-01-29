@@ -1,6 +1,5 @@
 package ru.foodbooking.foodws.services;
 
-import antlr.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -24,19 +23,20 @@ public class CategoriesService implements FBServices {
     public FBServicesRes execute(FBServicesReq request) throws FBException {
 
         FBServicesRes res = new FBServicesRes();
-        List<Categories> categoriesList = new ArrayList<>();
+        List<Categories> categoriesList;
         if (request != null) {
             if (request.getPointId() != null) {
                 categoriesList = categoriesRepository.findByPointId(request.getPointId());
                 if (!CollectionUtils.isEmpty(categoriesList)){
                     List<TCategories> tCategoriesList = new ArrayList<>();
                     for (Categories categories : categoriesList){
-                        TCategories tCategories = new TCategories();
-                        tCategories.setPointId(categories.getPointId());
-                        tCategories.setCtgrBrief(categories.getCtgrBrief());
-                        tCategories.setCtgrId(categories.getCtgrId());
-                        tCategories.setCtgrLogo(categories.getCtgrLogo());
-                        tCategories.setCtgrName(categories.getCtgrName());
+                        TCategories tCategory = new TCategories();
+                        tCategory.setPointId(categories.getPointId());
+                        tCategory.setCtgrBrief(categories.getCtgrBrief());
+                        tCategory.setCtgrId(categories.getCtgrId());
+                        tCategory.setCtgrLogo(categories.getCtgrLogo());
+                        tCategory.setCtgrName(categories.getCtgrName());
+                        tCategoriesList.add(tCategory);
                     }
                     res.setCtgrList(tCategoriesList);
                 }
