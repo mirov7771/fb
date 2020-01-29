@@ -2,17 +2,17 @@ package ru.foodbooking.foodws.support.request;
 
 public class FBServicesReq {
 
-    private Long pointid;
+    private Long pointId;
     private String address;
-    private Long ctgrid;
-    private Long productid;
+    private Long ctgrId;
+    private Long productId;
 
-    public void setPointid(Long pointid) {
-        this.pointid = pointid;
+    public void setPointId(Long pointId) {
+        this.pointId = pointId;
     }
 
-    public Long getPointid() {
-        return pointid;
+    public Long getPointId() {
+        return pointId;
     }
 
     public void setAddress(String address) {
@@ -23,20 +23,20 @@ public class FBServicesReq {
         return address;
     }
 
-    public void setCtgrid(Long ctgrid) {
-        this.ctgrid = ctgrid;
+    public void setCtgrId(Long ctgrId) {
+        this.ctgrId = ctgrId;
     }
 
-    public Long getCtgrid() {
-        return ctgrid;
+    public Long getCtgrId() {
+        return ctgrId;
     }
 
-    public void setProductid(Long productid) {
-        this.productid = productid;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public Long getProductid() {
-        return productid;
+    public Long getProductId() {
+        return productId;
     }
 }
 
