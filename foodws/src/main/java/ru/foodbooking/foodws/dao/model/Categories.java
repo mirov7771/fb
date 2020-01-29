@@ -19,6 +19,8 @@ public class Categories {
     private String ctgrName;
     @Column(name = "CTGRLOGO")
     private String ctgrLogo;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     @OneToMany(mappedBy = "ctgrId",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Products> productsList;

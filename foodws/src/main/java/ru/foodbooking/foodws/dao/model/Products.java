@@ -18,6 +18,8 @@ public class Products {
     private String prdName;
     @Column(name = "PRDLOGO")
     private String prdLogo;
+    @Column(name = "DESCRIPTION")
+    private String description;
 
     public Long getPrdId() {
         return prdId;
