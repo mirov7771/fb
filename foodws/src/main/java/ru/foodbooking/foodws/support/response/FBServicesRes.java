@@ -2,6 +2,7 @@ package ru.foodbooking.foodws.support.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.foodbooking.foodws.support.type.TCategories;
 import ru.foodbooking.foodws.support.type.TPoints;
 
 import java.util.List;
@@ -11,14 +12,8 @@ public class FBServicesRes {
 
     @JsonProperty("pointslist")
     private List<TPoints> pointsList;
-    @JsonProperty("ctgrid")
-    private Long ctgrId;
-    @JsonProperty("ctgrbrief")
-    private String ctgrBrief;
-    @JsonProperty("ctgrname")
-    private String ctgrName;
-    @JsonProperty("ctgrlogo")
-    private String ctgrLogo;
+    @JsonProperty("ctgrlist")
+    private List<TCategories> ctgrList;
     @JsonProperty("prdid")
     private Long prdId;
     @JsonProperty("prdbrief")
@@ -36,36 +31,12 @@ public class FBServicesRes {
         this.pointsList = pointsList;
     }
 
-    public Long getCtgrId() {
-        return ctgrId;
+    public List<TCategories> getCategoriesList() {
+        return ctgrList;
     }
 
-    public void setCtgrId(Long ctgrId) {
-        this.ctgrId = ctgrId;
-    }
-
-    public String getCtgrBrief() {
-        return ctgrBrief;
-    }
-
-    public void setCtgrBrief(String ctgrBrief) {
-        this.ctgrBrief = ctgrBrief;
-    }
-
-    public String getCtgrName() {
-        return ctgrName;
-    }
-
-    public void setCtgrName(String ctgrName) {
-        this.ctgrName = ctgrName;
-    }
-
-    public String getCtgrLogo() {
-        return ctgrLogo;
-    }
-
-    public void setCtgrLogo(String ctgrLogo) {
-        this.ctgrLogo = ctgrLogo;
+    public void setCategoriesList(List<TCategories> ctgrList) {
+        this.ctgrList = ctgrList;
     }
 
     public Long getPrdId() {
@@ -99,4 +70,5 @@ public class FBServicesRes {
     public void setPrdLogo(String prdLogo) {
         this.prdLogo = prdLogo;
     }
+
 }
