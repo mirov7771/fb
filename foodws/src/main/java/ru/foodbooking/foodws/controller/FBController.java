@@ -24,8 +24,7 @@ public class FBController {
         FBServices service = fbServices.get(method);
         if (service == null)
             throw new FBException(FBConstant.CODE_TECHNICAL_ERROR, FBConstant.MESSAGE_TECHNICAL_ERROR);
-        service.execute(null);
-        return null;
+        return service.execute(req);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/")

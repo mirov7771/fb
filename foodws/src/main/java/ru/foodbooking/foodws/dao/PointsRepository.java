@@ -11,5 +11,6 @@ public interface PointsRepository extends CrudRepository<Points, String> {
 
     List<Points> findByPointName(String pointName);
     List<Points> findByPointAddress(String pointAddress);
-    Points findByPointId(Long pointId);
+    List<Points> findByPointId(Long pointId);
+    List<Points> findAll();
 }

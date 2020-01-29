@@ -11,6 +11,6 @@ public interface CategoriesRepository extends CrudRepository<Categories, String>
 
     List<Categories> findByPointId(Long pointId);
     List<Categories> findByCtgrName(String CtgrName);
-    Categories findByCtgrId(Long ctgrId);
+    List<Categories> findByCtgrId(Long ctgrId);
 
 }
