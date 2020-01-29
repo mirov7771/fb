@@ -37,6 +37,7 @@ public class CategoriesService implements FBServices {
                     tCategory.setCtgrId(categories.getCtgrId());
                     tCategory.setCtgrLogo(categories.getCtgrLogo());
                     tCategory.setCtgrName(categories.getCtgrName());
+                    tCategory.setDescription(categories.getDescription());
                     tCategoriesList.add(tCategory);
                 }
                 res.setCtgrList(tCategoriesList);

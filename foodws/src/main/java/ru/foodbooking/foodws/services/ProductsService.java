@@ -35,6 +35,7 @@ public class ProductsService implements FBServices {
                     tProduct.setPrdBrief(product.getPrdBrief());
                     tProduct.setPrdName(product.getPrdName());
                     tProduct.setPrdLogo(product.getPrdLogo());
+                    tProduct.setDescription(product.getDescription());
                     tProductsList.add(tProduct);
                 }
                 res.setProductsList(tProductsList);
