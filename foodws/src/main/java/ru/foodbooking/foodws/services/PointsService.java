@@ -9,6 +9,7 @@ import ru.foodbooking.foodws.dao.PointsRepository;
 import ru.foodbooking.foodws.dao.model.Points;
 import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
+import ru.foodbooking.foodws.support.type.TPoints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class PointsService implements FBServices {
     @Override
     public FBServicesRes execute(FBServicesReq request) throws FBException {
 
+        FBServicesRes res = new FBServicesRes();
         List<Points> pointsList = new ArrayList<>();
         if (request != null){
             if (request.getPointId() != null){
@@ -33,10 +35,19 @@ public class PointsService implements FBServices {
             pointsList = pointsRepository.findAll();
         }
         if (!CollectionUtils.isEmpty(pointsList)){
+            List<TPoints> tPointsList = new ArrayList<>();
             for (Points point : pointsList){
-
+                 TPoints tPoint = new TPoints();
+                 tPoint.setPointId(point.getPointId());
+                 tPoint.setPointBrief(point.getPointBrief());
+                 tPoint.setPointName(point.getPointName());
+                 tPoint.setPointAddress(point.getPointAddress());
+                 tPoint.setPointLogo(point.getPointLogo());
+                 tPointsList.add(tPoint);
             }
+            res.setPointsList(tPointsList);
         }
-        return null;
+        return res;
     }
+
 }
