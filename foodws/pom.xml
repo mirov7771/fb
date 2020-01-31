@@ -10,12 +10,14 @@
 	</parent>
 	<groupId>ru.foodbooking</groupId>
 	<artifactId>foodws</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${deploy.version}</version>
 	<packaging>war</packaging>
 	<name>foodws</name>
 	<description>FOOD BOOKING WEB SERVICE</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
