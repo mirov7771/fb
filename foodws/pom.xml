@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>ru.foodbooking</groupId>
 	<artifactId>foodws</artifactId>
-	<version>${deploy.version}</version>
+	<version>31012020</version>
 	<packaging>war</packaging>
 	<name>foodws</name>
 	<description>FOOD BOOKING WEB SERVICE</description>
