@@ -9,8 +9,7 @@ import java.util.List;
 @Repository
 public interface PointsRepository extends CrudRepository<Points, String> {
 
-    List<Points> findByPointName(String pointName);
     List<Points> findByPointAddress(String pointAddress);
     List<Points> findByPointId(Long pointId);
-    List<Points> findAll();
+
 }

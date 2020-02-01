@@ -6,23 +6,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FBConfig {
 
-    @Value("${datasource.driverClassName}")
+    @Value("${spring.datasource.driverClassName}")
     private String driverClassName;
-    @Value("${datasource.url}")
+    @Value("${spring.datasource.url}")
     private String url;
-    @Value("${datasource.username}")
+    @Value("${spring.datasource.username}")
     private String username;
-    @Value("${datasource.password}")
+    @Value("${spring.datasource.password}")
     private String password;
-    @Value("${jpa.database-platform}")
+    @Value("${spring.jpa.database-platform}")
     private String databasePlatform;
-    @Value("${jpa.show-sql}")
+    @Value("${spring.jpa.show-sql}")
     private Boolean showSql;
-    @Value("${jpa.generate-ddl}")
+    @Value("${spring.jpa.generate-ddl}")
     private Boolean generateDdl;
-    @Value("${jpa.hibernate.ddl-auto}")
+    @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
-    @Value("${jpa.hibernate.naming.physical-strategy}")
+    @Value("${spring.jpa.hibernate.naming.physical-strategy}")
     private String physicalStrategy;
 
     public String getDriverClassName() {

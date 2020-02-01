@@ -10,7 +10,6 @@ import java.util.List;
 public interface CategoriesRepository extends CrudRepository<Categories, String> {
 
     List<Categories> findByPointId(Long pointId);
-    List<Categories> findByCtgrName(String CtgrName);
     List<Categories> findByCtgrId(Long ctgrId);
 
 }

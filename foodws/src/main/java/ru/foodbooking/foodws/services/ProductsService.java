@@ -1,5 +1,6 @@
 package ru.foodbooking.foodws.services;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -8,7 +9,6 @@ import ru.foodbooking.foodws.dao.ProductsRepository;
 import ru.foodbooking.foodws.dao.model.Products;
 import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
-import ru.foodbooking.foodws.support.type.TProducts;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
 import java.util.ArrayList;
@@ -17,20 +17,23 @@ import java.util.List;
 @Component("products")
 public class ProductsService implements FBServices {
 
+    private static Logger LOG = Logger.getLogger(ProductsService.class);
+
     @Autowired
     private ProductsRepository productsRepository;
 
     @Override
-    public FBServicesRes execute(FBServicesReq request) throws FBException {
+    public List<FBServicesRes> execute(FBServicesReq request) throws FBException {
+        LOG.debug("In method products");
         FBServicesRes res = new FBServicesRes();
         ValidationUtils.validateRequest(request);
         List<Products> productsList;
+        List<FBServicesRes> tProductsList = new ArrayList<>();
         if (request.getCtgrId() != null){
             productsList = productsRepository.findByCtgrId(request.getCtgrId());
             if (!CollectionUtils.isEmpty(productsList)){
-                List<TProducts> tProductsList = new ArrayList<>();
                 for(Products product : productsList){
-                    TProducts tProduct = new TProducts();
+                    FBServicesRes tProduct = new FBServicesRes();
                     tProduct.setCtgrId(product.getCtgrId());
                     tProduct.setPrdBrief(product.getPrdBrief());
                     tProduct.setPrdName(product.getPrdName());
@@ -39,9 +42,9 @@ public class ProductsService implements FBServices {
                     tProduct.setCost(product.getCost());
                     tProductsList.add(tProduct);
                 }
-                res.setProductsList(tProductsList);
             }
         }
-        return res;
+        LOG.debug("Out method products");
+        return tProductsList;
     }
 }

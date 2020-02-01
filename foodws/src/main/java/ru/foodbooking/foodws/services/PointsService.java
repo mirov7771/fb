@@ -1,5 +1,6 @@
 package ru.foodbooking.foodws.services;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -9,7 +10,6 @@ import ru.foodbooking.foodws.dao.PointsRepository;
 import ru.foodbooking.foodws.dao.model.Points;
 import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
-import ru.foodbooking.foodws.support.type.TPoints;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,27 +17,33 @@ import java.util.List;
 @Component("points")
 public class PointsService implements FBServices {
 
+    private static Logger LOG = Logger.getLogger(PointsService.class);
+
     @Autowired
     private PointsRepository pointsRepository;
 
     @Override
-    public FBServicesRes execute(FBServicesReq request) throws FBException {
-
+    public List<FBServicesRes> execute(FBServicesReq request) throws FBException {
+        LOG.debug("In method points");
         FBServicesRes res = new FBServicesRes();
         List<Points> pointsList = new ArrayList<>();
-        if (request != null){
-            if (request.getPointId() != null){
-                pointsList = pointsRepository.findByPointId(request.getPointId());
-            } else if (!StringUtils.isEmpty(request.getAddress())){
-                pointsList = pointsRepository.findByPointAddress(request.getAddress());
-            }
+        if (request.getPointId() != null){
+            pointsList = pointsRepository.findByPointId(request.getPointId());
+        } else if (!StringUtils.isEmpty(request.getAddress())){
+            pointsList = pointsRepository.findByPointAddress(request.getAddress());
         } else {
-            pointsList = pointsRepository.findAll();
+            Iterable<Points> pointsIterable = pointsRepository.findAll();
+            if (pointsIterable != null){
+                for(Points point : pointsIterable){
+                    pointsList.add(point);
+                }
+            }
         }
+
+        List<FBServicesRes> tPointsList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(pointsList)){
-            List<TPoints> tPointsList = new ArrayList<>();
             for (Points point : pointsList){
-                 TPoints tPoint = new TPoints();
+                 FBServicesRes tPoint = new FBServicesRes();
                  tPoint.setPointId(point.getPointId());
                  tPoint.setPointBrief(point.getPointBrief());
                  tPoint.setPointName(point.getPointName());
@@ -45,9 +51,9 @@ public class PointsService implements FBServices {
                  tPoint.setPointLogo(point.getPointLogo());
                  tPointsList.add(tPoint);
             }
-            res.setPointsList(tPointsList);
         }
-        return res;
+        LOG.debug("Out method points");
+        return tPointsList;
     }
 
 }

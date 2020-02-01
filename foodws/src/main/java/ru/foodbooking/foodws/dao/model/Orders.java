@@ -1,12 +1,15 @@
 package ru.foodbooking.foodws.dao.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 @Table(name = "FB_ORDER")
-public class Orders {
+public class Orders implements Serializable {
+
+    private static final long serialVersionUID = -602019617430872021L;
 
     @Id
     @Column(name = "ORDERID")

@@ -1,11 +1,14 @@
 package ru.foodbooking.foodws.dao.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "FB_POINTS")
-public class Points {
+public class Points implements Serializable {
+
+    private static final long serialVersionUID = 587189478058181192L;
 
     @Id
     @Column(name = "POINTID")

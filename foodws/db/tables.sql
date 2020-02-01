@@ -4,7 +4,7 @@ create table FB_POINTS
 	POINTBRIEF varchar(150),
 	POINTNAME varchar(255),
 	POINTADDRESS varchar(255),
-	POINTLOGO varchar(1500)
+	POINTLOGO text
 );
 
 create table FB_CATEGORIES
@@ -13,7 +13,7 @@ create table FB_CATEGORIES
 	POINTID bigint,
 	CTGRBRIEF varchar(150),
 	CTGRNAME varchar(255),
-	CTGRLOGO varchar(1500),
+	CTGRLOGO text,
 	DESCRIPTION varchar(255)
 );
 
@@ -23,7 +23,7 @@ create table FB_PRODUCTS
 	CTGRID bigint,
 	PRDBRIEF varchar(150),
 	PRDNAME varchar(255),
-	PRDLOGO varchar(1500),
+	PRDLOGO text,
 	DESCRIPTION varchar(255),
 	COST numeric(38,2)
 );

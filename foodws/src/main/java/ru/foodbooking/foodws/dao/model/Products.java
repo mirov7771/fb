@@ -1,11 +1,14 @@
 package ru.foodbooking.foodws.dao.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "FB_PRODUCTS")
-public class Products {
+public class Products implements Serializable {
+
+    private static final long serialVersionUID = 2712083515043911106L;
 
     @Id
     @Column(name = "PRDID")
