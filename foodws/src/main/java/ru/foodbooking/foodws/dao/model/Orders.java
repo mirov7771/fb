@@ -1,8 +1,6 @@
 package ru.foodbooking.foodws.dao.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -10,7 +8,9 @@ import java.util.Date;
 @Table(name = "FB_ORDER")
 public class Orders {
 
+    @Id
     @Column(name = "ORDERID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     @Column(name = "ORDERDATE")
     private Date orderDate;
