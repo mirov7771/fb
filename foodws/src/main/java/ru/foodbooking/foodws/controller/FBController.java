@@ -16,7 +16,7 @@ public class FBController {
     @Autowired
     private Map<String, FBServices> fbServices;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/fb")
+    @RequestMapping(method = RequestMethod.PUT, value = "/fb")
     @ResponseBody
     public FBServicesRes handleRequest(@RequestParam("method") String method,
                                        @RequestBody FBServicesReq req)
