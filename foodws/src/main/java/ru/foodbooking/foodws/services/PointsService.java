@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import ru.foodbooking.foodws.FBException;
+import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.dao.PointsRepository;
 import ru.foodbooking.foodws.dao.model.Points;
-import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
 
 import java.util.ArrayList;
@@ -23,9 +23,8 @@ public class PointsService implements FBServices {
     private PointsRepository pointsRepository;
 
     @Override
-    public List<FBServicesRes> execute(FBServicesReq request) throws FBException {
+    public List<FBServicesRes> execute(GetRequest request) throws FBException {
         LOG.debug("In method points");
-        FBServicesRes res = new FBServicesRes();
         List<Points> pointsList = new ArrayList<>();
         if (request.getPointId() != null){
             pointsList = pointsRepository.findByPointId(request.getPointId());
@@ -40,7 +39,7 @@ public class PointsService implements FBServices {
             }
         }
 
-        List<FBServicesRes> tPointsList = new ArrayList<>();
+        List<FBServicesRes> res = new ArrayList<>();
         if (!CollectionUtils.isEmpty(pointsList)){
             for (Points point : pointsList){
                  FBServicesRes tPoint = new FBServicesRes();
@@ -49,11 +48,11 @@ public class PointsService implements FBServices {
                  tPoint.setPointName(point.getPointName());
                  tPoint.setPointAddress(point.getPointAddress());
                  tPoint.setPointLogo(point.getPointLogo());
-                 tPointsList.add(tPoint);
+                 res.add(tPoint);
             }
         }
         LOG.debug("Out method points");
-        return tPointsList;
+        return res;
     }
 
 }

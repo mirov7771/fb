@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FBServicesRes {
@@ -38,6 +40,18 @@ public class FBServicesRes {
     private String prdLogo;
     @JsonProperty ("cost")
     private BigDecimal cost;
+    @JsonProperty("orderid")
+    private Long orderId;
+    @JsonProperty("orderdate")
+    private Date orderDate;
+    @JsonProperty("clientphone")
+    private String clientPhone;
+    @JsonProperty("clientname")
+    private String clientName;
+    @JsonProperty("totalcost")
+    private BigDecimal totalCost;
+    @JsonProperty("orderattributes")
+    private List<TOrderAttributes> orderAttributes;
 
     public Long getPointId() {
         return pointId;
@@ -157,5 +171,116 @@ public class FBServicesRes {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public BigDecimal getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(BigDecimal totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public List<TOrderAttributes> getOrderAttributes() {
+        return orderAttributes;
+    }
+
+    public void setOrderAttributes(List<TOrderAttributes> orderAttributes) {
+        this.orderAttributes = orderAttributes;
+    }
+
+    public static class TOrderAttributes{
+        @JsonProperty("id")
+        private long orderAttributeId;
+        @JsonProperty("orderid")
+        private long orderId;
+        @JsonProperty("productid")
+        private long productId;
+        @JsonProperty("productname")
+        private String productName;
+        @JsonProperty("productcost")
+        private float prCost;
+        @JsonProperty("productcount")
+        private int cnt;
+
+        public long getOrderAttributeId() {
+            return orderAttributeId;
+        }
+
+        public void setOrderAttributeId(long orderAttributeId) {
+            this.orderAttributeId = orderAttributeId;
+        }
+
+        public long getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(long orderId) {
+            this.orderId = orderId;
+        }
+
+        public long getProductId() {
+            return productId;
+        }
+
+        public void setProductId(long productId) {
+            this.productId = productId;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public void setProductName(String productName) {
+            this.productName = productName;
+        }
+
+        public float getPrCost() {
+            return prCost;
+        }
+
+        public void setPrCost(float prCost) {
+            this.prCost = prCost;
+        }
+
+        public int getCnt() {
+            return cnt;
+        }
+
+        public void setCnt(int cnt) {
+            this.cnt = cnt;
+        }
     }
 }

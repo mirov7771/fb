@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "FB_ORDER")
@@ -25,6 +26,9 @@ public class Orders implements Serializable {
     private Long pointId;
     @Column(name = "TOTALCOST")
     private BigDecimal totalCost;
+
+    @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<OrdersAttribute> ordersAttributeList;
 
     public Long getOrderId() {
         return orderId;
@@ -72,5 +76,13 @@ public class Orders implements Serializable {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public List<OrdersAttribute> getOrdersAttributeList() {
+        return ordersAttributeList;
+    }
+
+    public void setOrdersAttributeList(List<OrdersAttribute> ordersAttributeList) {
+        this.ordersAttributeList = ordersAttributeList;
     }
 }

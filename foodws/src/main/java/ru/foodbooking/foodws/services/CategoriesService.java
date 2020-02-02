@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import ru.foodbooking.foodws.FBException;
+import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.dao.CategoriesRepository;
 import ru.foodbooking.foodws.dao.model.Categories;
-import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
@@ -23,14 +23,12 @@ public class CategoriesService implements FBServices {
     private CategoriesRepository categoriesRepository;
 
     @Override
-    public List<FBServicesRes> execute(FBServicesReq request) throws FBException {
+    public List<FBServicesRes> execute(GetRequest request) throws FBException {
         LOG.debug("In method categories");
-        FBServicesRes res = new FBServicesRes();
         ValidationUtils.validateRequest(request);
-        List<Categories> categoriesList;
-        List<FBServicesRes> tCategoriesList = new ArrayList<>();
+        List<FBServicesRes> res = new ArrayList<>();
         if (request.getPointId() != null) {
-            categoriesList = categoriesRepository.findByPointId(request.getPointId());
+            List<Categories>categoriesList = categoriesRepository.findByPointId(request.getPointId());
             if (!CollectionUtils.isEmpty(categoriesList)){
                 for (Categories categories : categoriesList){
                     FBServicesRes tCategory = new FBServicesRes();
@@ -40,11 +38,11 @@ public class CategoriesService implements FBServices {
                     tCategory.setCtgrLogo(categories.getCtgrLogo());
                     tCategory.setCtgrName(categories.getCtgrName());
                     tCategory.setDescription(categories.getDescription());
-                    tCategoriesList.add(tCategory);
+                    res.add(tCategory);
                 }
             }
         }
         LOG.debug("Out method categories");
-        return tCategoriesList;
+        return res;
     }
 }

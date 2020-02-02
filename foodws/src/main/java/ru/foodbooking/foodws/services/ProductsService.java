@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import ru.foodbooking.foodws.FBException;
+import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.dao.ProductsRepository;
 import ru.foodbooking.foodws.dao.model.Products;
-import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
@@ -23,14 +23,12 @@ public class ProductsService implements FBServices {
     private ProductsRepository productsRepository;
 
     @Override
-    public List<FBServicesRes> execute(FBServicesReq request) throws FBException {
+    public List<FBServicesRes> execute(GetRequest request) throws FBException {
         LOG.debug("In method products");
-        FBServicesRes res = new FBServicesRes();
         ValidationUtils.validateRequest(request);
-        List<Products> productsList;
-        List<FBServicesRes> tProductsList = new ArrayList<>();
+        List<FBServicesRes> res = new ArrayList<>();
         if (request.getCtgrId() != null){
-            productsList = productsRepository.findByCtgrId(request.getCtgrId());
+            List<Products>productsList = productsRepository.findByCtgrId(request.getCtgrId());
             if (!CollectionUtils.isEmpty(productsList)){
                 for(Products product : productsList){
                     FBServicesRes tProduct = new FBServicesRes();
@@ -40,11 +38,11 @@ public class ProductsService implements FBServices {
                     tProduct.setPrdLogo(product.getPrdLogo());
                     tProduct.setDescription(product.getDescription());
                     tProduct.setCost(product.getCost());
-                    tProductsList.add(tProduct);
+                    res.add(tProduct);
                 }
             }
         }
         LOG.debug("Out method products");
-        return tProductsList;
+        return res;
     }
 }

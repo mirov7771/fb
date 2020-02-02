@@ -25,9 +25,6 @@ public class OrdersAttribute implements Serializable {
     @Column(name = "CNT")
     private int cnt;
 
-    @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<OrdersAttribute> ordersAttributeList;
-
     public long getOrderAttributeId() {
         return orderAttributeId;
     }
@@ -76,11 +73,4 @@ public class OrdersAttribute implements Serializable {
         this.cnt = cnt;
     }
 
-    public List<OrdersAttribute> getOrdersAttributeList() {
-        return ordersAttributeList;
-    }
-
-    public void setOrdersAttributeList(List<OrdersAttribute> ordersAttributeList) {
-        this.ordersAttributeList = ordersAttributeList;
-    }
 }

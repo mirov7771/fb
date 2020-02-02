@@ -10,5 +10,6 @@ import java.util.List;
 public interface OrdersRepository extends CrudRepository<Orders, String> {
 
     List<Orders> findByOrderId(Long orderId);
+    List<Orders> findByClientPhone(String clientPhone);
 
 }

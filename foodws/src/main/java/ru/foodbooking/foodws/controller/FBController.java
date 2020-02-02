@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.foodbooking.foodws.FBConstant;
 import ru.foodbooking.foodws.FBException;
+import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.services.FBServices;
-import ru.foodbooking.foodws.support.request.FBServicesReq;
 import ru.foodbooking.foodws.support.response.FBServicesRes;
 
 import java.util.Date;
@@ -27,16 +27,19 @@ public class FBController {
                                              @RequestParam(value = "pointid", required = false) Long pointid,
                                              @RequestParam(value = "address",required = false) String address,
                                              @RequestParam(value = "ctgrid", required = false) Long ctgrid,
-                                             @RequestParam(value = "productid", required = false) Long productid)
+                                             @RequestParam(value = "productid", required = false) Long productid,
+                                             @RequestParam(value = "phone", required = false) String phone)
             throws FBException {
         FBServices service = fbServices.get(method);
         if (service == null)
             throw new FBException(FBConstant.CODE_TECHNICAL_ERROR, FBConstant.MESSAGE_TECHNICAL_ERROR);
-        FBServicesReq req = new FBServicesReq();
-        req.setPointId(pointid);
-        req.setAddress(address);
-        req.setCtgrId(ctgrid);
-        req.setProductId(productid);
+        GetRequest req = new GetRequest.Builder()
+                .setPointId(pointid)
+                .setAddress(address)
+                .setCtgrId(ctgrid)
+                .setProductId(productid)
+                .setClientPhone(phone)
+                .build();
         LOG.debug("Start ["+method+"] in "+new Date());
         List<FBServicesRes> res = service.execute(req);
         LOG.debug("End ["+method+"] in "+new Date());
