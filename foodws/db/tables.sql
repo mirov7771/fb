@@ -47,3 +47,11 @@ create table FB_ORDERSATTRIBUTE
 	PRCOST numeric(38,2),
 	CNT int
 );
+
+create table FB_CLIENTS
+(
+    CLIENTID bigint GENERATED ALWAYS AS IDENTITY,
+    CLIENTNAME varchar(150),
+    CLIENTPHONE varchar(20),
+    DEVICEID varchar(255)
+);
