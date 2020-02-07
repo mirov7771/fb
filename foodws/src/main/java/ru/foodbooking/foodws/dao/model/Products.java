@@ -26,6 +26,8 @@ public class Products implements Serializable {
     private String description;
     @Column(name = "COST")
     private BigDecimal cost;
+    @Column(name = "POINTID")
+    private Long pointId;
 
     public Long getPrdId() {
         return prdId;
@@ -81,5 +83,13 @@ public class Products implements Serializable {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public Long getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(Long pointId) {
+        this.pointId = pointId;
     }
 }

@@ -25,7 +25,8 @@ create table FB_PRODUCTS
 	PRDNAME varchar(255),
 	PRDLOGO text,
 	DESCRIPTION varchar(255),
-	COST numeric(38,2)
+	COST numeric(38,2),
+	POINTID bigint
 );
 
 create table FB_ORDER
