@@ -12,7 +12,6 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.util.Log4jConfigurer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

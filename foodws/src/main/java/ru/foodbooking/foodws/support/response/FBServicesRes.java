@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class FBServicesRes {
     private String clientName;
     @JsonProperty("totalcost")
     private BigDecimal totalCost;
+    @JsonProperty("type")
+    private Integer type;
     @JsonProperty("orderattributes")
     private List<TOrderAttributes> orderAttributes;
 
@@ -213,6 +216,14 @@ public class FBServicesRes {
         this.totalCost = totalCost;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public List<TOrderAttributes> getOrderAttributes() {
         return orderAttributes;
     }
@@ -283,4 +294,11 @@ public class FBServicesRes {
             this.cnt = cnt;
         }
     }
+
+    public static final Comparator<FBServicesRes> COMPARE_BY_TYPE = new Comparator<FBServicesRes>() {
+        @Override
+        public int compare(FBServicesRes t1, FBServicesRes t2) {
+            return t1.getType() - t2.getType();
+        }
+    };
 }
