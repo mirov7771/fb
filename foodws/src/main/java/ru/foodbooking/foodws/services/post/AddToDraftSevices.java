@@ -42,7 +42,7 @@ public class AddToDraftSevices implements PostServices {
             });
         }
 
-        int status = orderInsert.insert(order, attrs);
+        int status = orderInsert.insert(order, attrs, request.getDeviceId());
         PostResponse response = new PostResponse();
         response.setStatus(status);
         return response;

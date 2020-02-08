@@ -21,6 +21,8 @@ public class PostRequest {
     private BigDecimal totalCost;
     @JsonProperty("attrs")
     private List<PostRequest.TAttr> attrs;
+    @JsonProperty("deviceid")
+    private String deviceId;
 
     public Long getPointId() {
         return pointId;
@@ -122,5 +124,14 @@ public class PostRequest {
         public void setCnt(int cnt) {
             this.cnt = cnt;
         }
+
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 }

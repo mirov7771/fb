@@ -28,6 +28,8 @@ public class Orders implements Serializable {
     private BigDecimal totalCost;
     @Column(name = "ORDERSTATE")
     private String orderState;
+    @Column(name = "USERID")
+    private Long userId;
 
     @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrdersAttribute> ordersAttributeList;
@@ -78,6 +80,14 @@ public class Orders implements Serializable {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getOrderState() {
