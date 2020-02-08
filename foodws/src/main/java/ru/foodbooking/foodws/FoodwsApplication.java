@@ -35,7 +35,7 @@ public class FoodwsApplication extends SpringBootServletInitializer {
 
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		LogManager.resetConfiguration();
-		PropertyConfigurator.configureAndWatch("log4j.properties");
+		PropertyConfigurator.configureAndWatch("/opt/foodbooking/logs/log4j.properties");
 		Runtime.getRuntime().addShutdownHook(new Thread(LogManager::shutdown));
 		LOG.info("ru.foodbooking.foodws.FoodwsApplication.onStartup(1): servletContext="+servletContext);
 		super.onStartup(servletContext);

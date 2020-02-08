@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -294,11 +293,4 @@ public class GetResponse {
             this.cnt = cnt;
         }
     }
-
-    public static final Comparator<GetResponse> COMPARE_BY_TYPE = new Comparator<GetResponse>() {
-        @Override
-        public int compare(GetResponse t1, GetResponse t2) {
-            return t1.getType() - t2.getType();
-        }
-    };
 }

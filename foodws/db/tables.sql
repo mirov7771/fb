@@ -37,7 +37,8 @@ create table FB_ORDER
 	CLIENTNAME varchar(255),
 	POINTID bigint,
 	TOTALCOST numeric(38,2),
-	ORDERSTATE varchar(50)
+	ORDERSTATE varchar(50),
+	USERID bigint
 );
 
 create table FB_ORDERSATTRIBUTE

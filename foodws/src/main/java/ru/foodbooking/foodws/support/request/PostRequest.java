@@ -11,8 +11,6 @@ public class PostRequest {
 
     @JsonProperty("pointid")
     private Long pointId;
-    @JsonProperty("date")
-    private Date date;
     @JsonProperty("clientphone")
     private String clientPhone;
     @JsonProperty("clientname")
@@ -30,14 +28,6 @@ public class PostRequest {
 
     public void setPointId(Long pointId) {
         this.pointId = pointId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getClientPhone() {

@@ -27,21 +27,26 @@ public class ProductsService implements GetServices {
         LOG.debug("In method products");
         ValidationUtils.validateRequest(request);
         List<GetResponse> res = new ArrayList<>();
-        if (request.getCtgrId() != null){
-            List<Products>productsList = productsRepository.findByCtgrId(request.getCtgrId());
-            if (!CollectionUtils.isEmpty(productsList)){
-                for(Products product : productsList){
-                    GetResponse tProduct = new GetResponse();
-                    tProduct.setCtgrId(product.getCtgrId());
-                    tProduct.setPrdBrief(product.getPrdBrief());
-                    tProduct.setPrdName(product.getPrdName());
-                    tProduct.setPrdLogo(product.getPrdLogo());
-                    tProduct.setDescription(product.getDescription());
-                    tProduct.setCost(product.getCost());
-                    res.add(tProduct);
-                }
+        List<Products>productsList = new ArrayList<>();
+        if (request.getCtgrId() != null) {
+            productsList = productsRepository.findByCtgrId(request.getCtgrId());
+        } else if (request.getPointId() != null) {
+            productsList = productsRepository.findByPointId(request.getPointId());
+        }
+        if (!CollectionUtils.isEmpty(productsList)){
+            for(Products product : productsList){
+                GetResponse tProduct = new GetResponse();
+                tProduct.setCtgrId(product.getCtgrId());
+                tProduct.setPrdBrief(product.getPrdBrief());
+                tProduct.setPrdName(product.getPrdName());
+                tProduct.setPrdLogo(product.getPrdLogo());
+                tProduct.setDescription(product.getDescription());
+                tProduct.setCost(product.getCost());
+                tProduct.setType(1);
+                res.add(tProduct);
             }
         }
+
         LOG.debug("Out method products");
         return res;
     }

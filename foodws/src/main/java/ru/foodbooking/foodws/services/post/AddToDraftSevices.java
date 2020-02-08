@@ -7,10 +7,12 @@ import ru.foodbooking.foodws.FBException;
 import ru.foodbooking.foodws.dao.impl.OrderInsert;
 import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
+import ru.foodbooking.foodws.support.enums.OrderStates;
 import ru.foodbooking.foodws.support.request.PostRequest;
 import ru.foodbooking.foodws.support.response.PostResponse;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component("draft")
@@ -24,8 +26,8 @@ public class AddToDraftSevices implements PostServices {
         Orders order = new Orders();
         order.setTotalCost(request.getTotalCost());
         order.setPointId(request.getPointId());
-        order.setOrderState("");
-        order.setOrderDate(request.getDate());
+        order.setOrderState(OrderStates.DRAFT.getStateName());
+        order.setOrderDate(new Date());
         order.setClientPhone(request.getClientPhone());
         order.setClientName(request.getClientName());
 

@@ -1,10 +1,13 @@
 package ru.foodbooking.foodws.dao.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "FB_USERS")
-public class Users {
+public class Users implements Serializable {
+
+    private static final long serialVersionUID = 3323932161830118300L;
 
     @Id
     @Column(name = "USERID")
