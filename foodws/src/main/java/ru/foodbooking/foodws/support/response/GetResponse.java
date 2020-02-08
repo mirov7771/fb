@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FBServicesRes {
+public class GetResponse {
 
     @JsonProperty("pointid")
     private Long pointId;
@@ -295,9 +295,9 @@ public class FBServicesRes {
         }
     }
 
-    public static final Comparator<FBServicesRes> COMPARE_BY_TYPE = new Comparator<FBServicesRes>() {
+    public static final Comparator<GetResponse> COMPARE_BY_TYPE = new Comparator<GetResponse>() {
         @Override
-        public int compare(FBServicesRes t1, FBServicesRes t2) {
+        public int compare(GetResponse t1, GetResponse t2) {
             return t1.getType() - t2.getType();
         }
     };

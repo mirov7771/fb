@@ -26,6 +26,8 @@ public class Orders implements Serializable {
     private Long pointId;
     @Column(name = "TOTALCOST")
     private BigDecimal totalCost;
+    @Column(name = "ORDERSTATE")
+    private String orderState;
 
     @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrdersAttribute> ordersAttributeList;
@@ -76,6 +78,14 @@ public class Orders implements Serializable {
 
     public void setTotalCost(BigDecimal totalCost) {
         this.totalCost = totalCost;
+    }
+
+    public String getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(String orderState) {
+        this.orderState = orderState;
     }
 
     public List<OrdersAttribute> getOrdersAttributeList() {

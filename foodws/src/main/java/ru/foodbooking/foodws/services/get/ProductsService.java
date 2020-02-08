@@ -1,4 +1,4 @@
-package ru.foodbooking.foodws.services;
+package ru.foodbooking.foodws.services.get;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +8,14 @@ import ru.foodbooking.foodws.FBException;
 import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.dao.ProductsRepository;
 import ru.foodbooking.foodws.dao.model.Products;
-import ru.foodbooking.foodws.support.response.FBServicesRes;
+import ru.foodbooking.foodws.support.response.GetResponse;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("products")
-public class ProductsService implements FBServices {
+public class ProductsService implements GetServices {
 
     private static Logger LOG = Logger.getLogger(ProductsService.class);
 
@@ -23,15 +23,15 @@ public class ProductsService implements FBServices {
     private ProductsRepository productsRepository;
 
     @Override
-    public List<FBServicesRes> execute(GetRequest request) throws FBException {
+    public List<GetResponse> execute(GetRequest request) throws FBException {
         LOG.debug("In method products");
         ValidationUtils.validateRequest(request);
-        List<FBServicesRes> res = new ArrayList<>();
+        List<GetResponse> res = new ArrayList<>();
         if (request.getCtgrId() != null){
             List<Products>productsList = productsRepository.findByCtgrId(request.getCtgrId());
             if (!CollectionUtils.isEmpty(productsList)){
                 for(Products product : productsList){
-                    FBServicesRes tProduct = new FBServicesRes();
+                    GetResponse tProduct = new GetResponse();
                     tProduct.setCtgrId(product.getCtgrId());
                     tProduct.setPrdBrief(product.getPrdBrief());
                     tProduct.setPrdName(product.getPrdName());

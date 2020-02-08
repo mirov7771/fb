@@ -36,7 +36,8 @@ create table FB_ORDER
 	CLIENTPHONE varchar(20),
 	CLIENTNAME varchar(255),
 	POINTID bigint,
-	TOTALCOST numeric(38,2)
+	TOTALCOST numeric(38,2),
+	ORDERSTATE varchar(50)
 );
 
 create table FB_ORDERSATTRIBUTE

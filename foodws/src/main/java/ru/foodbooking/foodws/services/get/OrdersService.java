@@ -1,4 +1,4 @@
-package ru.foodbooking.foodws.services;
+package ru.foodbooking.foodws.services.get;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,14 @@ import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
 import ru.foodbooking.foodws.dao.model.Points;
 import ru.foodbooking.foodws.support.request.GetRequest;
-import ru.foodbooking.foodws.support.response.FBServicesRes;
+import ru.foodbooking.foodws.support.response.GetResponse;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("orders")
-public class OrdersService implements FBServices {
+public class OrdersService implements GetServices {
 
     private static Logger LOG = Logger.getLogger(OrdersService.class);
 
@@ -30,15 +30,15 @@ public class OrdersService implements FBServices {
     private PointsRepository pointsRepository;
 
     @Override
-    public List<FBServicesRes> execute(GetRequest request) throws FBException {
+    public List<GetResponse> execute(GetRequest request) throws FBException {
         LOG.debug("In method points");
         ValidationUtils.validateRequest(request);
-        List<FBServicesRes> res = new ArrayList<>();
+        List<GetResponse> res = new ArrayList<>();
         if (!StringUtils.isEmpty(request.getClientPhone())){
             List<Orders> ordersList = ordersRepository.findByClientPhone(request.getClientPhone());
             if (!CollectionUtils.isEmpty(ordersList)){
                 for(Orders order : ordersList){
-                    FBServicesRes tOrder = new FBServicesRes();
+                    GetResponse tOrder = new GetResponse();
                     tOrder.setOrderId(order.getOrderId());
                     tOrder.setOrderDate(order.getOrderDate());
                     tOrder.setClientPhone(order.getClientPhone());
@@ -56,9 +56,9 @@ public class OrdersService implements FBServices {
                     tOrder.setPointAddress(pointAddress);
                     List<OrdersAttribute> attrs = order.getOrdersAttributeList();
                     if (!CollectionUtils.isEmpty(attrs)){
-                        List<FBServicesRes.TOrderAttributes> tattrs = new ArrayList<>();
+                        List<GetResponse.TOrderAttributes> tattrs = new ArrayList<>();
                         for(OrdersAttribute attr : attrs){
-                            FBServicesRes.TOrderAttributes tattr = new FBServicesRes.TOrderAttributes();
+                            GetResponse.TOrderAttributes tattr = new GetResponse.TOrderAttributes();
                             tattr.setOrderId(attr.getOrderId());
                             tattr.setOrderAttributeId(attr.getOrderAttributeId());
                             tattr.setProductName(attr.getProductName());

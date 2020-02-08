@@ -1,4 +1,4 @@
-package ru.foodbooking.foodws.services;
+package ru.foodbooking.foodws.services.get;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +10,14 @@ import ru.foodbooking.foodws.dao.model.Products;
 import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.dao.CategoriesRepository;
 import ru.foodbooking.foodws.dao.model.Categories;
-import ru.foodbooking.foodws.support.response.FBServicesRes;
+import ru.foodbooking.foodws.support.response.GetResponse;
 import ru.foodbooking.foodws.utils.ValidationUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component("menu")
-public class MenuService implements FBServices {
+public class MenuService implements GetServices {
 
     private static Logger LOG = Logger.getLogger(MenuService.class);
 
@@ -28,16 +28,16 @@ public class MenuService implements FBServices {
     private ProductsRepository productsRepository;
 
     @Override
-    public List<FBServicesRes> execute(GetRequest request) throws FBException {
+    public List<GetResponse> execute(GetRequest request) throws FBException {
         LOG.debug("In method categories");
         ValidationUtils.validateRequest(request);
-        List<FBServicesRes> res = new ArrayList<>();
+        List<GetResponse> res = new ArrayList<>();
         if (request.getPointId() != null) {
             Long pointId = request.getPointId();
             Iterable<Categories>categoriesList = categoriesRepository.findAll();
             if (categoriesList != null){
                 for(Categories category : categoriesList){
-                    FBServicesRes tCategory = new FBServicesRes();
+                    GetResponse tCategory = new GetResponse();
                     tCategory.setPointId(pointId);
                     tCategory.setCtgrBrief(category.getCtgrBrief());
                     tCategory.setCtgrId(category.getCtgrId());
@@ -51,7 +51,7 @@ public class MenuService implements FBServices {
             List<Products>productsList = productsRepository.findByPointId(pointId);
             if (!CollectionUtils.isEmpty(productsList)){
                 for(Products product : productsList){
-                    FBServicesRes tProduct = new FBServicesRes();
+                    GetResponse tProduct = new GetResponse();
                     tProduct.setCtgrId(product.getCtgrId());
                     tProduct.setPrdBrief(product.getPrdBrief());
                     tProduct.setPrdName(product.getPrdName());
@@ -63,7 +63,7 @@ public class MenuService implements FBServices {
                 }
             }
         }
-        res.sort(FBServicesRes.COMPARE_BY_TYPE);
+        res.sort(GetResponse.COMPARE_BY_TYPE);
         LOG.debug("Out method categories");
         return res;
     }
