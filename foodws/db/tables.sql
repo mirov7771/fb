@@ -57,3 +57,11 @@ create table FB_CLIENTS
     CLIENTPHONE varchar(20),
     DEVICEID varchar(255)
 );
+
+create table FB_USERS
+(
+    USERID bigint GENERATED ALWAYS AS IDENTITY,
+    USERPHONE varchar(20),
+    USERNAME varchar(150),
+    DEVICEID varchar(255)
+);
