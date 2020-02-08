@@ -1,12 +1,12 @@
 package ru.foodbooking.foodws.support.request;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class PostRequest {
 
     @JsonProperty("pointid")
@@ -21,6 +21,8 @@ public class PostRequest {
     private List<PostRequest.TAttr> attrs;
     @JsonProperty("deviceid")
     private String deviceId;
+    @JsonProperty("orderid")
+    private Long orderId;
 
     public Long getPointId() {
         return pointId;
@@ -123,5 +125,13 @@ public class PostRequest {
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }

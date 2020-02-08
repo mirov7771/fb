@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component("draft")
-public class AddToDraftSevices implements PostServices {
+public class AddToDraftSevice implements PostServices {
 
     @Autowired
     private OrderInsert orderInsert;
