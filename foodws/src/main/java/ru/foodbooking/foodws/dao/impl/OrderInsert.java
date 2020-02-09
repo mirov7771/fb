@@ -8,8 +8,12 @@ import ru.foodbooking.foodws.dao.UsersRepository;
 import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
 import ru.foodbooking.foodws.dao.model.Users;
+import ru.foodbooking.foodws.support.enums.Fields;
+import ru.foodbooking.foodws.support.enums.OrderStates;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class OrderInsert {
@@ -23,36 +27,55 @@ public class OrderInsert {
     @Autowired
     private UsersRepository usersRepository;
 
-    public int insert(Orders order, List<OrdersAttribute> attrs, String deviceId)
-    {
-        int retVal = 1;
-        if (order != null && (attrs != null && attrs.size() > 0)){
-
-            String phone = order.getClientPhone();
-            Users user = usersRepository.findByUserPhoneAndDeviceId(phone, deviceId);
-            Long userId;
-            if (user == null){
-                Users newUser = new Users();
-                newUser.setDeviceId(deviceId);
-                newUser.setUserName(order.getClientName());
-                newUser.setUserPhone(phone);
-                Users createdUser = usersRepository.save(newUser);
-                userId = createdUser.getUserId();
+    public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId) {
+        Map<String,Object> res = new HashMap<>();
+        res.put(Fields.PROPERTY_STATUS.getFieldName(),1);
+        if ((order != null && (attrs != null && attrs.size() > 0)) || orderId != null){
+            if (orderId != null){
+                res.put(Fields.PROPERTY_STATUS.getFieldName(), confirmed(orderId, deviceId));
             } else {
-                userId = user.getUserId();
+                res.put(Fields.PROPERTY_ORDER_ID.getFieldName(), draft(order, attrs));
+                res.put(Fields.PROPERTY_STATUS.getFieldName(), 0);
             }
+        }
+        return res;
+    }
 
-            if (userId != null) {
-                order.setUserId(userId);
-                Orders newOrder = ordersRepository.save(order);
-                if (newOrder != null) {
-                    for (OrdersAttribute attr : attrs) {
-                        attr.setOrderId(newOrder.getOrderId());
-                        ordersAttributeRepository.save(attr);
-                    }
-                    retVal = 0;
-                }
+    private Long draft(Orders order, List<OrdersAttribute> attrs){
+        Orders newOrder = ordersRepository.save(order);
+        Long orderId = null;
+        if (newOrder != null) {
+            orderId = newOrder.getOrderId();
+            for (OrdersAttribute attr : attrs) {
+                attr.setOrderId(orderId);
+                ordersAttributeRepository.save(attr);
             }
+        }
+        return orderId;
+    }
+
+    private int confirmed(Long orderId, String deviceId){
+        int retVal = 1;
+        Orders order = ordersRepository.findByOrderId(orderId);
+        String phone = order.getClientPhone();
+        Users user = usersRepository.findByUserPhoneAndDeviceId(phone, deviceId);
+        Long userId;
+        if (user == null){
+            Users newUser = new Users();
+            newUser.setDeviceId(deviceId);
+            newUser.setUserName(order.getClientName());
+            newUser.setUserPhone(phone);
+            Users createdUser = usersRepository.save(newUser);
+            userId = createdUser.getUserId();
+        } else {
+            userId = user.getUserId();
+        }
+
+        if (userId != null) {
+            order.setUserId(userId);
+            order.setOrderState(OrderStates.CONFIRMED.getStateName());
+            ordersRepository.save(order);
+            retVal = 0;
         }
         return retVal;
     }

@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface OrdersRepository extends CrudRepository<Orders, String> {
 
-    List<Orders> findByOrderId(Long orderId);
+    Orders findByOrderId(Long orderId);
     List<Orders> findByClientPhone(String clientPhone);
 
 }

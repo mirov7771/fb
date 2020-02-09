@@ -8,6 +8,8 @@ public class PostResponse {
 
     @JsonProperty("status")
     private int status;
+    @JsonProperty("orderid")
+    private Long orderId;
 
     public int getStatus() {
         return status;
@@ -15,5 +17,13 @@ public class PostResponse {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }

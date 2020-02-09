@@ -7,6 +7,7 @@ import ru.foodbooking.foodws.FBException;
 import ru.foodbooking.foodws.dao.impl.OrderInsert;
 import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
+import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 import ru.foodbooking.foodws.support.request.PostRequest;
 import ru.foodbooking.foodws.support.response.PostResponse;
@@ -14,15 +15,17 @@ import ru.foodbooking.foodws.support.response.PostResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
-@Component("draft")
-public class AddToDraftSevice implements PostServices {
+@Component("create")
+public class CreateOrderService implements PostServices {
 
     @Autowired
     private OrderInsert orderInsert;
 
     @Override
     public PostResponse execute(PostRequest request) throws FBException {
+
         Orders order = new Orders();
         order.setTotalCost(request.getTotalCost());
         order.setPointId(request.getPointId());
@@ -44,9 +47,10 @@ public class AddToDraftSevice implements PostServices {
             });
         }
 
-        int status = orderInsert.insert(order, attrs, request.getDeviceId());
+        Map<String, Object> db = orderInsert.insert(order, attrs, null, null);
         PostResponse response = new PostResponse();
-        response.setStatus(status);
+        response.setStatus((Integer) db.get(Fields.PROPERTY_STATUS.getFieldName()));
+        response.setOrderId((Long) db.get(Fields.PROPERTY_ORDER_ID.getFieldName()));
         return response;
     }
 }

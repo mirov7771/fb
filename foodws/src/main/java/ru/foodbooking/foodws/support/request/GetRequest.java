@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.support.request;
 
-public class GetRequest {
+public class GetRequest extends AbstractRequest{
 
     private Long pointId;
     private String address;

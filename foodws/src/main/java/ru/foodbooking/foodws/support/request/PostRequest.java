@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PostRequest {
+public class PostRequest extends AbstractRequest {
 
     @JsonProperty("pointid")
     private Long pointId;
@@ -23,6 +23,8 @@ public class PostRequest {
     private String deviceId;
     @JsonProperty("orderid")
     private Long orderId;
+    @JsonProperty("code")
+    private String code;
 
     public Long getPointId() {
         return pointId;
@@ -133,5 +135,13 @@ public class PostRequest {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
