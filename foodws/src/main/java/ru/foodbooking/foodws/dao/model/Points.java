@@ -1,11 +1,16 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "FB_POINTS")
+@Getter @Setter @NoArgsConstructor
 public class Points implements Serializable {
 
     private static final long serialVersionUID = 587189478058181192L;
@@ -25,52 +30,4 @@ public class Points implements Serializable {
 
     @OneToMany(mappedBy = "pointId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Categories> categoriesList;
-
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(Long pointId) {
-        this.pointId = pointId;
-    }
-
-    public String getPointBrief() {
-        return pointBrief;
-    }
-
-    public void setPointBrief(String pointBrief) {
-        this.pointBrief = pointBrief;
-    }
-
-    public String getPointName() {
-        return pointName;
-    }
-
-    public void setPointName(String pointName) {
-        this.pointName = pointName;
-    }
-
-    public String getPointAddress() {
-        return pointAddress;
-    }
-
-    public void setPointAddress(String pointAddress) {
-        this.pointAddress = pointAddress;
-    }
-
-    public String getPointLogo() {
-        return pointLogo;
-    }
-
-    public void setPointLogo(String pointLogo) {
-        this.pointLogo = pointLogo;
-    }
-
-    public List<Categories> getCategoriesList() {
-        return categoriesList;
-    }
-
-    public void setCategoriesList(List<Categories> categoriesList) {
-        this.categoriesList = categoriesList;
-    }
 }

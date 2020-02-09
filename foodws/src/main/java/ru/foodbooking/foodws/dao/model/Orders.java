@@ -1,5 +1,9 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -8,6 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "FB_ORDER")
+@Getter @Setter @NoArgsConstructor
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = -602019617430872021L;
@@ -34,75 +39,4 @@ public class Orders implements Serializable {
     @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrdersAttribute> ordersAttributeList;
 
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public String getClientPhone() {
-        return clientPhone;
-    }
-
-    public void setClientPhone(String clientPhone) {
-        this.clientPhone = clientPhone;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(Long pointId) {
-        this.pointId = pointId;
-    }
-
-    public BigDecimal getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getOrderState() {
-        return orderState;
-    }
-
-    public void setOrderState(String orderState) {
-        this.orderState = orderState;
-    }
-
-    public List<OrdersAttribute> getOrdersAttributeList() {
-        return ordersAttributeList;
-    }
-
-    public void setOrdersAttributeList(List<OrdersAttribute> ordersAttributeList) {
-        this.ordersAttributeList = ordersAttributeList;
-    }
 }

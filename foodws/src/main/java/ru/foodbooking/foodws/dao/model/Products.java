@@ -1,11 +1,16 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "FB_PRODUCTS")
+@Getter @Setter @NoArgsConstructor
 public class Products implements Serializable {
 
     private static final long serialVersionUID = 2712083515043911106L;
@@ -29,67 +34,4 @@ public class Products implements Serializable {
     @Column(name = "POINTID")
     private Long pointId;
 
-    public Long getPrdId() {
-        return prdId;
-    }
-
-    public void setPrdId(Long prdId) {
-        this.prdId = prdId;
-    }
-
-    public Long getCtgrId() {
-        return ctgrId;
-    }
-
-    public void setCtgrId(Long ctgrId) {
-        this.ctgrId = ctgrId;
-    }
-
-    public String getPrdBrief() {
-        return prdBrief;
-    }
-
-    public void setPrdBrief(String prdBrief) {
-        this.prdBrief = prdBrief;
-    }
-
-    public String getPrdName() {
-        return prdName;
-    }
-
-    public void setPrdName(String prdName) {
-        this.prdName = prdName;
-    }
-
-    public String getPrdLogo() {
-        return prdLogo;
-    }
-
-    public void setPrdLogo(String prdLogo) {
-        this.prdLogo = prdLogo;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(Long pointId) {
-        this.pointId = pointId;
-    }
 }

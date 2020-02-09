@@ -1,11 +1,16 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "FB_ORDERSATTRIBUTE")
+@Getter @Setter @NoArgsConstructor
 public class OrdersAttribute implements Serializable {
 
     private static final long serialVersionUID = -2591442644934729321L;
@@ -24,53 +29,5 @@ public class OrdersAttribute implements Serializable {
     private float prCost;
     @Column(name = "CNT")
     private int cnt;
-
-    public long getOrderAttributeId() {
-        return orderAttributeId;
-    }
-
-    public void setOrderAttributeId(long orderAttributeId) {
-        this.orderAttributeId = orderAttributeId;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(long productId) {
-        this.productId = productId;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public float getPrCost() {
-        return prCost;
-    }
-
-    public void setPrCost(float prCost) {
-        this.prCost = prCost;
-    }
-
-    public int getCnt() {
-        return cnt;
-    }
-
-    public void setCnt(int cnt) {
-        this.cnt = cnt;
-    }
 
 }

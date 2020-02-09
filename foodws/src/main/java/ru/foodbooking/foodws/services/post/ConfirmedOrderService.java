@@ -20,7 +20,7 @@ public class ConfirmedOrderService implements PostServices {
     @Override
     public PostResponse execute(PostRequest request) throws FBException {
         ValidationUtils.validateRequest(request);
-        Map<String, Object> db = orderInsert.insert(null, null, request.getDeviceId(), request.getOrderId());
+        Map<String, Object> db = orderInsert.insert(null, null, request.getDeviceId(), request.getOrderId(), request.getCode());
         PostResponse response = new PostResponse();
         response.setStatus((Integer) db.get(Fields.PROPERTY_STATUS.getFieldName()));
         return response;

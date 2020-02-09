@@ -66,3 +66,10 @@ create table FB_USERS
     USERNAME varchar(150),
     DEVICEID varchar(255)
 );
+
+create table FB_CODES
+(
+    CLIENTPHONE varchar(20),
+    CODE varchar(10),
+    COUNTS numeric(10)
+);

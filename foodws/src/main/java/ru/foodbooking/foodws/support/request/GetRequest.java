@@ -1,5 +1,12 @@
 package ru.foodbooking.foodws.support.request;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class GetRequest extends AbstractRequest{
 
     private Long pointId;
@@ -52,25 +59,5 @@ public class GetRequest extends AbstractRequest{
         ctgrId = builder.ctgrId;
         productId = builder.productId;
         clientPhone = builder.clientPhone;
-    }
-
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Long getCtgrId() {
-        return ctgrId;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public String getClientPhone() {
-        return clientPhone;
     }
 }

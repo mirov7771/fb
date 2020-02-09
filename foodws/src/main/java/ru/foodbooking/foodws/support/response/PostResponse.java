@@ -2,8 +2,14 @@ package ru.foodbooking.foodws.support.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
+@Setter
+@NoArgsConstructor
 public class PostResponse {
 
     @JsonProperty("status")
@@ -11,19 +17,4 @@ public class PostResponse {
     @JsonProperty("orderid")
     private Long orderId;
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
 }

@@ -1,11 +1,16 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "FB_CATEGORIES")
+@Getter @Setter @NoArgsConstructor
 public class Categories implements Serializable {
 
     private static final long serialVersionUID = 773490650559746268L;
@@ -28,59 +33,4 @@ public class Categories implements Serializable {
     @OneToMany(mappedBy = "ctgrId",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Products> productsList;
 
-    public Long getCtgrId() {
-        return ctgrId;
-    }
-
-    public void setCtgrId(Long ctgrId) {
-        this.ctgrId = ctgrId;
-    }
-
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(Long pointId) {
-        this.pointId = pointId;
-    }
-
-    public String getCtgrBrief() {
-        return ctgrBrief;
-    }
-
-    public void setCtgrBrief(String ctgrBrief) {
-        this.ctgrBrief = ctgrBrief;
-    }
-
-    public String getCtgrName() {
-        return ctgrName;
-    }
-
-    public void setCtgrName(String ctgrName) {
-        this.ctgrName = ctgrName;
-    }
-
-    public String getCtgrLogo() {
-        return ctgrLogo;
-    }
-
-    public void setCtgrLogo(String ctgrLogo) {
-        this.ctgrLogo = ctgrLogo;
-    }
-
-    public List<Products> getProductsList() {
-        return productsList;
-    }
-
-    public void setProductsList(List<Products> productsList) {
-        this.productsList = productsList;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

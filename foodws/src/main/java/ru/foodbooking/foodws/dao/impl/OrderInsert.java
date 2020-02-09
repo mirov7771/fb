@@ -8,6 +8,7 @@ import ru.foodbooking.foodws.dao.UsersRepository;
 import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
 import ru.foodbooking.foodws.dao.model.Users;
+import ru.foodbooking.foodws.gencheck.Sms;
 import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 
@@ -27,12 +28,15 @@ public class OrderInsert {
     @Autowired
     private UsersRepository usersRepository;
 
-    public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId) {
+    @Autowired
+    private Sms sms;
+
+    public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId, String code) {
         Map<String,Object> res = new HashMap<>();
         res.put(Fields.PROPERTY_STATUS.getFieldName(),1);
         if ((order != null && (attrs != null && attrs.size() > 0)) || orderId != null){
             if (orderId != null){
-                res.put(Fields.PROPERTY_STATUS.getFieldName(), confirmed(orderId, deviceId));
+                res.put(Fields.PROPERTY_STATUS.getFieldName(), confirmed(orderId, deviceId, code));
             } else {
                 res.put(Fields.PROPERTY_ORDER_ID.getFieldName(), draft(order, attrs));
                 res.put(Fields.PROPERTY_STATUS.getFieldName(), 0);
@@ -50,14 +54,18 @@ public class OrderInsert {
                 attr.setOrderId(orderId);
                 ordersAttributeRepository.save(attr);
             }
+            sms.generateCode(order.getClientPhone());
         }
         return orderId;
     }
 
-    private int confirmed(Long orderId, String deviceId){
+    private int confirmed(Long orderId, String deviceId, String code){
         int retVal = 1;
         Orders order = ordersRepository.findByOrderId(orderId);
         String phone = order.getClientPhone();
+        int validCode = sms.checkCode(phone, code);
+        if (validCode > 0)
+            return 2;
         Users user = usersRepository.findByUserPhoneAndDeviceId(phone, deviceId);
         Long userId;
         if (user == null){

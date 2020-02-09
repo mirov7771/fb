@@ -1,10 +1,15 @@
 package ru.foodbooking.foodws.dao.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "FB_USERS")
+@Getter @Setter @NoArgsConstructor
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 3323932161830118300L;
@@ -20,35 +25,4 @@ public class Users implements Serializable {
     @Column(name = "DEVICEID")
     private String deviceId;
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserPhone() {
-        return userPhone;
-    }
-
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
 }

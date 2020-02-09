@@ -2,12 +2,16 @@ package ru.foodbooking.foodws.support.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter @Setter @NoArgsConstructor
 public class GetResponse {
 
     @JsonProperty("pointid")
@@ -55,182 +59,7 @@ public class GetResponse {
     @JsonProperty("orderattributes")
     private List<TOrderAttributes> orderAttributes;
 
-    public Long getPointId() {
-        return pointId;
-    }
-
-    public void setPointId(Long pointId) {
-        this.pointId = pointId;
-    }
-
-    public String getPointBrief() {
-        return pointBrief;
-    }
-
-    public void setPointBrief(String pointBrief) {
-        this.pointBrief = pointBrief;
-    }
-
-    public String getPointName() {
-        return pointName;
-    }
-
-    public void setPointName(String pointName) {
-        this.pointName = pointName;
-    }
-
-    public String getPointAddress() {
-        return pointAddress;
-    }
-
-    public void setPointAddress(String pointAddress) {
-        this.pointAddress = pointAddress;
-    }
-
-    public String getPointLogo() {
-        return pointLogo;
-    }
-
-    public void setPointLogo(String pointLogo) {
-        this.pointLogo = pointLogo;
-    }
-
-    public Long getCtgrId() {
-        return ctgrId;
-    }
-
-    public void setCtgrId(Long ctgrId) {
-        this.ctgrId = ctgrId;
-    }
-
-    public String getCtgrBrief() {
-        return ctgrBrief;
-    }
-
-    public void setCtgrBrief(String ctgrBrief) {
-        this.ctgrBrief = ctgrBrief;
-    }
-
-    public String getCtgrName() {
-        return ctgrName;
-    }
-
-    public void setCtgrName(String ctgrName) {
-        this.ctgrName = ctgrName;
-    }
-
-    public String getCtgrLogo() {
-        return ctgrLogo;
-    }
-
-    public void setCtgrLogo(String ctgrLogo) {
-        this.ctgrLogo = ctgrLogo;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getPrdId() {
-        return prdId;
-    }
-
-    public void setPrdId(Long prdId) {
-        this.prdId = prdId;
-    }
-
-    public String getPrdBrief() {
-        return prdBrief;
-    }
-
-    public void setPrdBrief(String prdBrief) {
-        this.prdBrief = prdBrief;
-    }
-
-    public String getPrdName() {
-        return prdName;
-    }
-
-    public void setPrdName(String prdName) {
-        this.prdName = prdName;
-    }
-
-    public String getPrdLogo() {
-        return prdLogo;
-    }
-
-    public void setPrdLogo(String prdLogo) {
-        this.prdLogo = prdLogo;
-    }
-
-    public BigDecimal getCost() {
-        return cost;
-    }
-
-    public void setCost(BigDecimal cost) {
-        this.cost = cost;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public String getClientPhone() {
-        return clientPhone;
-    }
-
-    public void setClientPhone(String clientPhone) {
-        this.clientPhone = clientPhone;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public BigDecimal getTotalCost() {
-        return totalCost;
-    }
-
-    public void setTotalCost(BigDecimal totalCost) {
-        this.totalCost = totalCost;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public List<TOrderAttributes> getOrderAttributes() {
-        return orderAttributes;
-    }
-
-    public void setOrderAttributes(List<TOrderAttributes> orderAttributes) {
-        this.orderAttributes = orderAttributes;
-    }
-
+    @Getter @Setter @NoArgsConstructor
     public static class TOrderAttributes{
         @JsonProperty("id")
         private long orderAttributeId;
@@ -244,53 +73,5 @@ public class GetResponse {
         private float prCost;
         @JsonProperty("productcount")
         private int cnt;
-
-        public long getOrderAttributeId() {
-            return orderAttributeId;
-        }
-
-        public void setOrderAttributeId(long orderAttributeId) {
-            this.orderAttributeId = orderAttributeId;
-        }
-
-        public long getOrderId() {
-            return orderId;
-        }
-
-        public void setOrderId(long orderId) {
-            this.orderId = orderId;
-        }
-
-        public long getProductId() {
-            return productId;
-        }
-
-        public void setProductId(long productId) {
-            this.productId = productId;
-        }
-
-        public String getProductName() {
-            return productName;
-        }
-
-        public void setProductName(String productName) {
-            this.productName = productName;
-        }
-
-        public float getPrCost() {
-            return prCost;
-        }
-
-        public void setPrCost(float prCost) {
-            this.prCost = prCost;
-        }
-
-        public int getCnt() {
-            return cnt;
-        }
-
-        public void setCnt(int cnt) {
-            this.cnt = cnt;
-        }
     }
 }
