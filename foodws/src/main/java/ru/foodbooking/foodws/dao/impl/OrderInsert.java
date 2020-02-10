@@ -12,6 +12,7 @@ import ru.foodbooking.foodws.gencheck.Sms;
 import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +30,12 @@ public class OrderInsert {
     private UsersRepository usersRepository;
 
     @Autowired
+    private OrderDelete orderDelete;
+
+    @Autowired
     private Sms sms;
 
-    public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId, String code) {
+    public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId, String code){
         Map<String,Object> res = new HashMap<>();
         res.put(Fields.PROPERTY_STATUS.getFieldName(),1);
         if ((order != null && (attrs != null && attrs.size() > 0)) || orderId != null){
@@ -50,7 +54,7 @@ public class OrderInsert {
         Long orderId = null;
         if (newOrder != null) {
             orderId = newOrder.getOrderId();
-            for (OrdersAttribute attr : attrs) {
+            for(OrdersAttribute attr : attrs) {
                 attr.setOrderId(orderId);
                 ordersAttributeRepository.save(attr);
             }
@@ -64,8 +68,11 @@ public class OrderInsert {
         Orders order = ordersRepository.findByOrderId(orderId);
         String phone = order.getClientPhone();
         int validCode = sms.checkCode(phone, code);
-        if (validCode > 0)
+        if (validCode > 0) {
+            if (validCode == 2)
+                orderDelete.delete(orderId);
             return 2;
+        }
         Users user = usersRepository.findByUserPhoneAndDeviceId(phone, deviceId);
         Long userId;
         if (user == null){

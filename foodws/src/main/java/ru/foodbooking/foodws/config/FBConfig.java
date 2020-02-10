@@ -24,6 +24,12 @@ public class FBConfig {
     private String ddlAuto;
     @Value("${spring.jpa.hibernate.naming.physical-strategy}")
     private String physicalStrategy;
+    @Value("${spring.sms.login}")
+    private String smsLogin;
+    @Value("${spring.sms.password}")
+    private String smsPassword;
+    @Value("${spring.sms.url}")
+    private String smsUrl;
 
     public String getDriverClassName() {
         return driverClassName;
@@ -59,5 +65,17 @@ public class FBConfig {
 
     public String getPhysicalStrategy() {
         return physicalStrategy;
+    }
+
+    public String getSmsLogin() {
+        return smsLogin;
+    }
+
+    public String getSmsPassword() {
+        return smsPassword;
+    }
+
+    public String getSmsUrl() {
+        return smsUrl;
     }
 }

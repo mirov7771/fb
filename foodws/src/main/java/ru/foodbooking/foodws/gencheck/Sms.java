@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.foodbooking.foodws.dao.CodesRepository;
 import ru.foodbooking.foodws.dao.model.Codes;
+import ru.foodbooking.foodws.gates.SmsGate;
 
+import java.io.IOException;
 import java.util.Random;
 
 @Component
@@ -13,10 +15,15 @@ public class Sms implements GenerateAndCheck{
     @Autowired
     private CodesRepository codesRepository;
 
+    @Autowired
+    private SmsGate smsGate;
+
     @Override
-    public void generateCode(String phone) {
+    public void generateCode(String phone){
         String code = createCode();
-        codesRepository.save(new Codes(phone, code, 0));
+        Integer smsSend = smsGate.sendSms(phone, code);
+        if (smsSend.equals(0))
+            codesRepository.save(new Codes(phone, code, 0));
     }
 
     @Override
@@ -32,6 +39,7 @@ public class Sms implements GenerateAndCheck{
                 Integer dbCount = db.getCounts();
                 if (dbCount > 2){
                     codesRepository.delete(db);
+                    retCode = 2;
                 } else {
                     db.setCounts(dbCount+1);
                     codesRepository.save(db);
