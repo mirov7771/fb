@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class SmsResponse {
 
-    private Integer erroCode;
+    private String error;
 
-    public SmsResponse(Integer erroCode){
-        this.erroCode = erroCode;
+    public SmsResponse(String error){
+        this.error = error;
     }
 
 }

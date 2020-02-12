@@ -124,6 +124,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<directory>lib</directory>
+							<targetPath>WEB-INF/lib</targetPath>
+							<includes>
+								<include>**/*.jar</include>
+							</includes>
+						</resource>
+					</webResources>
+					<packagingExcludes>
+						WEB-INF/lib/log4j.jar
+					</packagingExcludes>
+					<archive>
+						<manifestEntries>
+							<Dependencies>ru.foodbooking.foodws</Dependencies>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
 		</plugins>
 		<finalName>foodws</finalName>
 	</build>

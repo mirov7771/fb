@@ -42,7 +42,9 @@ public class OrderInsert {
             if (orderId != null){
                 res.put(Fields.PROPERTY_STATUS.getFieldName(), confirmed(orderId, deviceId, code));
             } else {
-                res.put(Fields.PROPERTY_ORDER_ID.getFieldName(), draft(order, attrs));
+                Long dbOrderId = draft(order, attrs);
+                int status = dbOrderId == null ? 1 : 0;
+                res.put(Fields.PROPERTY_ORDER_ID.getFieldName(), dbOrderId);
                 res.put(Fields.PROPERTY_STATUS.getFieldName(), 0);
             }
         }
@@ -50,15 +52,17 @@ public class OrderInsert {
     }
 
     private Long draft(Orders order, List<OrdersAttribute> attrs){
-        Orders newOrder = ordersRepository.save(order);
+        int i = sms.generateCode(order.getClientPhone());
         Long orderId = null;
-        if (newOrder != null) {
-            orderId = newOrder.getOrderId();
-            for(OrdersAttribute attr : attrs) {
-                attr.setOrderId(orderId);
-                ordersAttributeRepository.save(attr);
+        if (i == 0) {
+            Orders newOrder = ordersRepository.save(order);
+            if (newOrder != null) {
+                orderId = newOrder.getOrderId();
+                for (OrdersAttribute attr : attrs) {
+                    attr.setOrderId(orderId);
+                    ordersAttributeRepository.save(attr);
+                }
             }
-            sms.generateCode(order.getClientPhone());
         }
         return orderId;
     }

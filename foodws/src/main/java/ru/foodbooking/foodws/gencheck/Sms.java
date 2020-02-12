@@ -19,11 +19,14 @@ public class Sms implements GenerateAndCheck{
     private SmsGate smsGate;
 
     @Override
-    public void generateCode(String phone){
+    public int generateCode(String phone){
         String code = createCode();
-        Integer smsSend = smsGate.sendSms(phone, code);
-        if (smsSend.equals(0))
+        int smsSend = smsGate.sendSms(phone, code);
+        if (smsSend == 0) {
             codesRepository.save(new Codes(phone, code, 0));
+            return 0;
+        }
+        return 1;
     }
 
     @Override
