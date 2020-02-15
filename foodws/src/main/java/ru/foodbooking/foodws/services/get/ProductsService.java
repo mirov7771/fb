@@ -45,6 +45,7 @@ public class ProductsService implements GetServices {
                 tProduct.setDescription(product.getDescription());
                 tProduct.setCost(product.getCost());
                 tProduct.setType(1);
+                tProduct.setPrdId(product.getPrdId());
                 res.add(tProduct);
             }
         }

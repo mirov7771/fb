@@ -70,8 +70,8 @@ public class GetResponse {
         @JsonProperty("productname")
         private String productName;
         @JsonProperty("productcost")
-        private float prCost;
+        private BigDecimal prCost;
         @JsonProperty("productcount")
-        private int cnt;
+        private BigDecimal cnt;
     }
 }

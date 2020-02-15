@@ -35,14 +35,14 @@ public class PostRequest extends AbstractRequest {
 
         @JsonProperty("orderid")
         private long orderId;
-        @JsonProperty("productid")
+        @JsonProperty("prdid")
         private long productId;
-        @JsonProperty("productname")
+        @JsonProperty("prdname")
         private String productName;
-        @JsonProperty("prcost")
-        private float prCost;
+        @JsonProperty("cost")
+        private BigDecimal prCost;
         @JsonProperty("cnt")
-        private int cnt;
+        private BigDecimal cnt;
 
     }
 

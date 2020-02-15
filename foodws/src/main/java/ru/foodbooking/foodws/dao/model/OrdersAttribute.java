@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -26,8 +27,8 @@ public class OrdersAttribute implements Serializable {
     @Column(name = "PRODUCTNAME")
     private String productName;
     @Column(name = "PRCOST")
-    private float prCost;
+    private BigDecimal prCost;
     @Column(name = "CNT")
-    private int cnt;
+    private BigDecimal cnt;
 
 }

@@ -12,6 +12,7 @@ import ru.foodbooking.foodws.support.enums.OrderStates;
 import ru.foodbooking.foodws.support.request.PostRequest;
 import ru.foodbooking.foodws.support.response.PostResponse;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +28,6 @@ public class CreateOrderService implements PostServices {
     public PostResponse execute(PostRequest request) throws FBException {
 
         Orders order = new Orders();
-        order.setTotalCost(request.getTotalCost());
         order.setPointId(request.getPointId());
         order.setOrderState(OrderStates.DRAFT.getStateName());
         order.setOrderDate(new Date());
@@ -36,16 +36,22 @@ public class CreateOrderService implements PostServices {
 
         List<OrdersAttribute> attrs = new ArrayList<>();
         List<PostRequest.TAttr> reqAttrs = request.getAttrs();
+        BigDecimal totalCost = BigDecimal.ZERO;
         if (!CollectionUtils.isEmpty(reqAttrs)){
-            reqAttrs.forEach(item -> {
+            for(PostRequest.TAttr item : reqAttrs){
                 OrdersAttribute attr = new OrdersAttribute();
-                attr.setCnt(item.getCnt());
-                attr.setPrCost(item.getPrCost());
+                BigDecimal cost = item.getPrCost();
+                BigDecimal cnt = item.getCnt();
+                BigDecimal prCost = cost.multiply(cnt);
+                totalCost = totalCost.add(prCost);
+                attr.setCnt(cnt);
+                attr.setPrCost(cost);
                 attr.setProductId(item.getProductId());
                 attr.setProductName(item.getProductName());
                 attrs.add(attr);
-            });
+            };
         }
+        order.setTotalCost(totalCost);
 
         Map<String, Object> db = orderInsert.insert(order, attrs, null, null, null);
         PostResponse response = new PostResponse();
