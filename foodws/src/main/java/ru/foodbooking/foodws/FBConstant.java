@@ -7,5 +7,6 @@ public class FBConstant {
     public static String MESSAGE_TECHNICAL_ERROR = "Technical error";
     public static String MESSAGE_BUSINESS_ERROR = "Business error";
     public static String SMS_MESSAGE = "Код подтверждения ";
+    public static String ALL_CATEGORY = "Все";
 
 }

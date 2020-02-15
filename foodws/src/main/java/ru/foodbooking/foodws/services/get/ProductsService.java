@@ -28,7 +28,9 @@ public class ProductsService implements GetServices {
         ValidationUtils.validateRequest(request);
         List<GetResponse> res = new ArrayList<>();
         List<Products>productsList = new ArrayList<>();
-        if (request.getCtgrId() != null) {
+        if (request.getCtgrId() != null && request.getCtgrId().equals(0L) && request.getPointId() != null){
+            productsList = productsRepository.findByPointId(request.getPointId());
+        } else if (request.getCtgrId() != null) {
             productsList = productsRepository.findByCtgrId(request.getCtgrId());
         } else if (request.getPointId() != null) {
             productsList = productsRepository.findByPointId(request.getPointId());
