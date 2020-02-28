@@ -1,9 +1,11 @@
 package ru.foodbooking.foodws.config;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Getter
 public class FBConfig {
 
     @Value("${spring.datasource.driverClassName}")
@@ -30,52 +32,15 @@ public class FBConfig {
     private String smsPassword;
     @Value("${spring.sms.url}")
     private String smsUrl;
+    @Value("${spring.mail.host}")
+    private String host;
+    @Value("${spring.mail.username}")
+    private String mailUsername;
+    @Value("${spring.mail.password}")
+    private String mailPassword;
+    @Value("${spring.mail.port}")
+    private Long mailPort;
+    @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
+    private Boolean enable;
 
-    public String getDriverClassName() {
-        return driverClassName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getDatabasePlatform() {
-        return databasePlatform;
-    }
-
-    public Boolean getShowSql() {
-        return showSql;
-    }
-
-    public Boolean getGenerateDdl() {
-        return generateDdl;
-    }
-
-    public String getDdlAuto() {
-        return ddlAuto;
-    }
-
-    public String getPhysicalStrategy() {
-        return physicalStrategy;
-    }
-
-    public String getSmsLogin() {
-        return smsLogin;
-    }
-
-    public String getSmsPassword() {
-        return smsPassword;
-    }
-
-    public String getSmsUrl() {
-        return smsUrl;
-    }
 }

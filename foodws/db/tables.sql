@@ -4,7 +4,9 @@ create table FB_POINTS
 	POINTBRIEF varchar(150),
 	POINTNAME varchar(255),
 	POINTADDRESS varchar(255),
-	POINTLOGO text
+	POINTLOGO text,
+	EMAIL varchar(150),
+	COORDINATES varchar(150)
 );
 
 create table FB_CATEGORIES

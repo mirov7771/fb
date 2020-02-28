@@ -1,5 +1,6 @@
 package ru.foodbooking.foodws;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -20,9 +21,8 @@ import java.util.Arrays;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableCaching
+@Slf4j
 public class FoodwsApplication extends SpringBootServletInitializer {
-
-	private static Logger LOG = Logger.getLogger(FoodwsApplication.class);
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
@@ -37,7 +37,7 @@ public class FoodwsApplication extends SpringBootServletInitializer {
 		LogManager.resetConfiguration();
 		PropertyConfigurator.configureAndWatch("/opt/foodbooking/logs/log4j.properties");
 		Runtime.getRuntime().addShutdownHook(new Thread(LogManager::shutdown));
-		LOG.info("ru.foodbooking.foodws.FoodwsApplication.onStartup(1): servletContext="+servletContext);
+		log.info("ru.foodbooking.foodws.FoodwsApplication.onStartup(1): servletContext="+servletContext);
 		super.onStartup(servletContext);
 	}
 
@@ -46,7 +46,7 @@ public class FoodwsApplication extends SpringBootServletInitializer {
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			String beanNamesString = String.join("\n",beanNames);
-			LOG.info("Let's inspect the beans provided by Spring Boot:\n" + beanNamesString);
+			log.info("Let's inspect the beans provided by Spring Boot:\n" + beanNamesString);
 		};
 	}
 }

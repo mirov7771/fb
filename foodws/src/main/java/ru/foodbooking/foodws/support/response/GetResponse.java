@@ -24,6 +24,10 @@ public class GetResponse {
     private String pointAddress;
     @JsonProperty("pointlogo")
     private String pointLogo;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("coordinates")
+    private String coordinates;
     @JsonProperty("ctgrid")
     private Long ctgrId;
     @JsonProperty("ctgrbrief")

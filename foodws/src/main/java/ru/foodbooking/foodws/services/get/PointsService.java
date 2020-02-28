@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.services.get;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -15,16 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("points")
+@Slf4j
 public class PointsService implements GetServices {
-
-    private static Logger LOG = Logger.getLogger(PointsService.class);
 
     @Autowired
     private PointsRepository pointsRepository;
 
     @Override
     public List<GetResponse> execute(GetRequest request) throws FBException {
-        LOG.debug("In method points");
+        log.debug("In method points");
         List<Points> pointsList = new ArrayList<>();
         if (request.getPointId() != null){
             pointsList = pointsRepository.findByPointId(request.getPointId());
@@ -48,10 +47,12 @@ public class PointsService implements GetServices {
                  tPoint.setPointName(point.getPointName());
                  tPoint.setPointAddress(point.getPointAddress());
                  tPoint.setPointLogo(point.getPointLogo());
+                 tPoint.setEmail(point.getEmail());
+                 tPoint.setCoordinates(point.getCoordinates());
                  res.add(tPoint);
             }
         }
-        LOG.debug("Out method points");
+        log.debug("Out method points");
         return res;
     }
 

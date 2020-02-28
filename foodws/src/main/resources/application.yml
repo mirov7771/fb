@@ -16,3 +16,13 @@ spring:
     login: foodbooking
     password: foodyaka-100
     url: https://smsc.ru/sys/send.php
+  mail:
+    host: smtp.mail.ru
+    username: info@foodbooking.ru
+    password: de!4H3ywsAHX
+    port: 465
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true

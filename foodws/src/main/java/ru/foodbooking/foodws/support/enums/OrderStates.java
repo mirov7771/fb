@@ -4,6 +4,7 @@ public enum OrderStates {
 
     DRAFT("draft"),
     CONFIRMED("confirmed"),
+    FINISHED("finished"),
     CANCELED("canceled");
 
     private String stateName;

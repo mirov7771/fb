@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.controller;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@Slf4j
 public class FBController {
-
-    private static Logger LOG = Logger.getLogger(FBController.class);
 
     @Autowired
     private Map<String, GetServices> getServices;
@@ -48,9 +47,9 @@ public class FBController {
                 .setProductId(productid)
                 .setClientPhone(phone)
                 .build();
-        LOG.debug("Start ["+method+"] in "+new Date());
+        log.debug("Start ["+method+"] in "+new Date());
         List<GetResponse> res = service.execute(req);
-        LOG.debug("End ["+method+"] in "+new Date());
+        log.debug("End ["+method+"] in "+new Date());
         return res;
     }
 

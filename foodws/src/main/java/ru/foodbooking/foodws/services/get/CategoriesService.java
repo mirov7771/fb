@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.services.get;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.foodbooking.foodws.FBConstant;
@@ -17,9 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("ctgr")
+@Slf4j
 public class CategoriesService implements GetServices {
-
-    private static Logger LOG = Logger.getLogger(CategoriesService.class);
 
     @Autowired
     private CategoriesRepository categoriesRepository;
@@ -29,7 +28,7 @@ public class CategoriesService implements GetServices {
 
     @Override
     public List<GetResponse> execute(GetRequest request) throws FBException {
-        LOG.debug("In method categories");
+        log.debug("In method categories");
         ValidationUtils.validateRequest(request);
         List<GetResponse> res = new ArrayList<>();
         CategoryBuilder categoryBuilder = new CategoryBuilder.Builder(0L)
@@ -53,7 +52,7 @@ public class CategoriesService implements GetServices {
                 }
             }
         }
-        LOG.debug("Out method categories");
+        log.debug("Out method categories");
         return res;
     }
 }

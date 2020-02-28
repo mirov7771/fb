@@ -12,7 +12,6 @@ import ru.foodbooking.foodws.gencheck.Sms;
 import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.services.get;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -19,9 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("orders")
+@Slf4j
 public class OrdersService implements GetServices {
-
-    private static Logger LOG = Logger.getLogger(OrdersService.class);
 
     @Autowired
     private OrdersRepository ordersRepository;
@@ -31,7 +30,7 @@ public class OrdersService implements GetServices {
 
     @Override
     public List<GetResponse> execute(GetRequest request) throws FBException {
-        LOG.debug("In method points");
+        log.debug("In method points");
         ValidationUtils.validateRequest(request);
         List<GetResponse> res = new ArrayList<>();
         if (!StringUtils.isEmpty(request.getClientPhone())){
@@ -73,7 +72,7 @@ public class OrdersService implements GetServices {
                 }
             }
         }
-        LOG.debug("Out method points");
+        log.debug("Out method points");
         return res;
     }
 }

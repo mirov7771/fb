@@ -1,6 +1,6 @@
 package ru.foodbooking.foodws.services.get;
 
-import org.apache.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -15,16 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component("products")
+@Slf4j
 public class ProductsService implements GetServices {
-
-    private static Logger LOG = Logger.getLogger(ProductsService.class);
 
     @Autowired
     private ProductsRepository productsRepository;
 
     @Override
     public List<GetResponse> execute(GetRequest request) throws FBException {
-        LOG.debug("In method products");
+        log.debug("In method products");
         ValidationUtils.validateRequest(request);
         List<GetResponse> res = new ArrayList<>();
         List<Products>productsList = new ArrayList<>();
@@ -50,7 +49,7 @@ public class ProductsService implements GetServices {
             }
         }
 
-        LOG.debug("Out method products");
+        log.debug("Out method products");
         return res;
     }
 }

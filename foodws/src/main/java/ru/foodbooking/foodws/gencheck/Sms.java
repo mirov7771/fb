@@ -6,7 +6,6 @@ import ru.foodbooking.foodws.dao.CodesRepository;
 import ru.foodbooking.foodws.dao.model.Codes;
 import ru.foodbooking.foodws.gates.SmsGate;
 
-import java.io.IOException;
 import java.util.Random;
 
 @Component

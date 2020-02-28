@@ -27,6 +27,10 @@ public class Points implements Serializable {
     private String pointAddress;
     @Column(name = "POINTLOGO")
     private String pointLogo;
+    @Column(name = "EMAIL")
+    private String email;
+    @Column(name = "COORDINATES")
+    private String coordinates;
 
     @OneToMany(mappedBy = "pointId", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Categories> categoriesList;
