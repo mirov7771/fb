@@ -1,14 +1,19 @@
 package ru.foodbooking.foodws.dao.impl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.foodbooking.foodws.FBConstant;
 import ru.foodbooking.foodws.dao.OrdersAttributeRepository;
 import ru.foodbooking.foodws.dao.OrdersRepository;
+import ru.foodbooking.foodws.dao.PointsRepository;
 import ru.foodbooking.foodws.dao.UsersRepository;
 import ru.foodbooking.foodws.dao.model.Orders;
 import ru.foodbooking.foodws.dao.model.OrdersAttribute;
+import ru.foodbooking.foodws.dao.model.Points;
 import ru.foodbooking.foodws.dao.model.Users;
 import ru.foodbooking.foodws.gencheck.Sms;
+import ru.foodbooking.foodws.services.notification.NotificationService;
 import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 
@@ -30,6 +35,12 @@ public class OrderInsert {
 
     @Autowired
     private OrderDelete orderDelete;
+
+    @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
+    private PointsRepository pointsRepository;
 
     @Autowired
     private Sms sms;
@@ -94,6 +105,18 @@ public class OrderInsert {
             order.setOrderState(OrderStates.CONFIRMED.getStateName());
             ordersRepository.save(order);
             retVal = 0;
+        }
+        Long pointId = order.getPointId();
+        List<Points> pointList = pointsRepository.findByPointId(pointId);
+        if (!CollectionUtils.isEmpty(pointList)){
+            Points point = pointList.get(0);
+            String email = point.getEmail();
+            String subject = String.format(FBConstant.MERCHANT_MESSAGE_SUBJECT, order.getOrderId());
+            String text = String.format(FBConstant.MERCHANT_MESSAGE_TEXT, order.getOrderId(),
+                    order.getClientName(),
+                    order.getClientPhone(),
+                    order.getTotalCost());
+            notificationService.sendNotification(email, subject, text);
         }
         return retVal;
     }
