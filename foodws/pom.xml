@@ -10,8 +10,8 @@
 	</parent>
 	<groupId>ru.foodbooking</groupId>
 	<artifactId>foodws</artifactId>
-	<version>31012020</version>
-	<packaging>war</packaging>
+	<version>${deploy.version}</version>
+	<packaging>jar</packaging>
 	<name>foodws</name>
 	<description>FOOD BOOKING WEB SERVICE</description>
 
@@ -55,6 +55,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.ws</groupId>
@@ -104,6 +110,17 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 			<version>2.2.5.RELEASE</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-commons</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -128,32 +145,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.2.0</version>
 				<configuration>
-					<webResources>
-						<resource>
-							<directory>lib</directory>
-							<targetPath>WEB-INF/lib</targetPath>
-							<includes>
-								<include>**/*.jar</include>
-							</includes>
-						</resource>
-					</webResources>
-					<packagingExcludes>
-						WEB-INF/lib/log4j.jar
-					</packagingExcludes>
-					<archive>
-						<manifestEntries>
-							<Dependencies>ru.foodbooking.foodws</Dependencies>
-						</manifestEntries>
-					</archive>
+					<executable>true</executable>
 				</configuration>
+
 			</plugin>
 		</plugins>
-		<finalName>foodws</finalName>
 	</build>
 
 </project>

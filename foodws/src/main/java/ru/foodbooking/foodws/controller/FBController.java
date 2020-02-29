@@ -27,7 +27,7 @@ public class FBController {
     @Autowired
     private Map<String, PostServices> postServices;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/fb")
+    @RequestMapping(method = RequestMethod.GET, value = "/foodws/v1/fb")
     @ResponseBody
     public List<GetResponse> handleRequest(@RequestParam(value = "method", required = true) String method,
                                            @RequestParam(value = "pointid", required = false) Long pointid,
@@ -53,7 +53,7 @@ public class FBController {
         return res;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/fb")
+    @RequestMapping(method = RequestMethod.POST, value = "/foodws/v1/fb")
     @ResponseBody
     @Transactional
     public PostResponse execute(@RequestParam("method") String method,
@@ -66,7 +66,7 @@ public class FBController {
         return service.execute(request);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/")
+    @RequestMapping(method = RequestMethod.GET, value = "/foodws/v1")
     public String check(){
         return "Application is running";
     }

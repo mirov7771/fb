@@ -2,7 +2,6 @@ package ru.foodbooking.foodws;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -35,9 +34,10 @@ public class FoodwsApplication extends SpringBootServletInitializer {
 
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		LogManager.resetConfiguration();
-		PropertyConfigurator.configureAndWatch("/opt/foodbooking/logs/log4j.properties");
+		PropertyConfigurator.configureAndWatch("log4j.properties");
 		Runtime.getRuntime().addShutdownHook(new Thread(LogManager::shutdown));
 		log.info("ru.foodbooking.foodws.FoodwsApplication.onStartup(1): servletContext="+servletContext);
+		System.out.println("ru.foodbooking.foodws.FoodwsApplication.onStartup(1): servletContext="+servletContext);
 		super.onStartup(servletContext);
 	}
 
@@ -46,6 +46,7 @@ public class FoodwsApplication extends SpringBootServletInitializer {
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			String beanNamesString = String.join("\n",beanNames);
+			System.out.println("Let's inspect the beans provided by Spring Boot:\n" + beanNamesString);
 			log.info("Let's inspect the beans provided by Spring Boot:\n" + beanNamesString);
 		};
 	}
