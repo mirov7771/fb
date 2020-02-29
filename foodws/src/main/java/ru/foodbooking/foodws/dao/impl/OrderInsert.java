@@ -2,6 +2,7 @@ package ru.foodbooking.foodws.dao.impl;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Component;
 import ru.foodbooking.foodws.FBConstant;
 import ru.foodbooking.foodws.dao.OrdersAttributeRepository;
@@ -116,7 +117,12 @@ public class OrderInsert {
                     order.getClientName(),
                     order.getClientPhone(),
                     order.getTotalCost());
-            notificationService.sendNotification(email, subject, text);
+            try {
+                notificationService.sendNotification(email, subject, text);
+            } catch (MailException e) {
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+            }
         }
         return retVal;
     }

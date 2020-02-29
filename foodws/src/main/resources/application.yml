@@ -20,7 +20,7 @@ spring:
     host: smtp.mail.ru
     username: info@foodbooking.ru
     password: de!4H3ywsAHX
-    port: 465
+    port: 587
     properties:
       mail:
         smtp:
