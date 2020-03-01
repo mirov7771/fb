@@ -1,1 +1,1 @@
-C:\Maven\bin\mvn clean package -Ddeploy.version=4
+C:\Maven\bin\mvn clean package -Ddeploy.version=%1

@@ -15,6 +15,7 @@ import ru.foodbooking.foodws.dao.model.Points;
 import ru.foodbooking.foodws.dao.model.Users;
 import ru.foodbooking.foodws.gencheck.Sms;
 import ru.foodbooking.foodws.services.notification.NotificationService;
+import ru.foodbooking.foodws.support.builder.OrderMessageBuilder;
 import ru.foodbooking.foodws.support.enums.Fields;
 import ru.foodbooking.foodws.support.enums.OrderStates;
 
@@ -45,6 +46,9 @@ public class OrderInsert {
 
     @Autowired
     private Sms sms;
+
+    @Autowired
+    private OrderMessageBuilder orderMessageBuilder;
 
     public Map<String, Object> insert(Orders order, List<OrdersAttribute> attrs, String deviceId, Long orderId, String code){
         Map<String,Object> res = new HashMap<>();
@@ -117,6 +121,9 @@ public class OrderInsert {
                     order.getClientName(),
                     order.getClientPhone(),
                     order.getTotalCost());
+            List<OrdersAttribute> attrsList = order.getOrdersAttributeList();
+            if (!CollectionUtils.isEmpty(attrsList))
+                text = orderMessageBuilder.prepareMessage(attrsList, text);
             try {
                 notificationService.sendNotification(email, subject, text);
             } catch (MailException e) {

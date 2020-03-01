@@ -60,6 +60,8 @@ public class GetResponse {
     private BigDecimal totalCost;
     @JsonProperty("type")
     private Integer type;
+    @JsonProperty("state")
+    private String orderState;
     @JsonProperty("orderattributes")
     private List<TOrderAttributes> orderAttributes;
 

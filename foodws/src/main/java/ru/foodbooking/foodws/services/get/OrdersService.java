@@ -53,6 +53,7 @@ public class OrdersService implements GetServices {
                     }
                     tOrder.setPointName(pointName);
                     tOrder.setPointAddress(pointAddress);
+                    tOrder.setOrderState(order.getOrderState());
                     List<OrdersAttribute> attrs = order.getOrdersAttributeList();
                     if (!CollectionUtils.isEmpty(attrs)){
                         List<GetResponse.TOrderAttributes> tattrs = new ArrayList<>();
