@@ -29,3 +29,6 @@ spring:
 
 server:
   port: 8009
+
+application:
+  accessToken: B0UYaNBpWbKyV0Wq1Qo1V1ZDwX85afmb

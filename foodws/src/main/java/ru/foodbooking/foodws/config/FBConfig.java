@@ -42,5 +42,7 @@ public class FBConfig {
     private Long mailPort;
     @Value("${spring.mail.properties.mail.smtp.starttls.enable}")
     private Boolean enable;
+    @Value("${application.accessToken}")
+    private String accessToken;
 
 }
