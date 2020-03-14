@@ -2,11 +2,13 @@ package ru.foodbooking.foodws.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import ru.foodbooking.foodws.FBConstant;
 import ru.foodbooking.foodws.FBException;
 import ru.foodbooking.foodws.config.FBConfig;
+import ru.foodbooking.foodws.health.HealthCheck;
 import ru.foodbooking.foodws.services.post.PostServices;
 import ru.foodbooking.foodws.support.request.GetRequest;
 import ru.foodbooking.foodws.services.get.GetServices;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("foodws")
 @Slf4j
 public class FBController {
 
@@ -31,7 +34,10 @@ public class FBController {
     @Autowired
     private Map<String, PostServices> postServices;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/foodws/v1/fb")
+    @Autowired
+    private HealthCheck healthCheck;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/v1/fb")
     @ResponseBody
     public List<GetResponse> handleRequest(@RequestParam(value = "method", required = true) String method,
                                            @RequestParam(value = "pointid", required = false) Long pointid,
@@ -59,7 +65,7 @@ public class FBController {
         return res;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/foodws/v1/fb")
+    @RequestMapping(method = RequestMethod.POST, value = "/v1/fb")
     @ResponseBody
     @Transactional
     public PostResponse execute(@RequestParam("method") String method,
@@ -74,7 +80,7 @@ public class FBController {
         return service.execute(request);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/foodws/v1")
+    @RequestMapping(method = RequestMethod.GET)
     public String check(){
         return "Application is running";
     }
@@ -83,5 +89,10 @@ public class FBController {
     {
         if (token == null || !token.equals(fbConfig.getAccessToken()))
             throw new FBException(FBConstant.CODE_TECHNICAL_ERROR, FBConstant.MESSAGE_TECHNICAL_ERROR);
+    }
+
+    @RequestMapping(value = "/health", method = RequestMethod.GET)
+    public Health healthCheak(){
+        return healthCheck.health();
     }
 }
