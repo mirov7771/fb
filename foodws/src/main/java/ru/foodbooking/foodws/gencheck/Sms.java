@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.foodbooking.foodws.dao.CodesRepository;
 import ru.foodbooking.foodws.dao.model.Codes;
-import ru.foodbooking.foodws.gates.SmsGate;
+import ru.foodbooking.foodws.gates.SmsByOperator;
 
 import java.util.Random;
 
@@ -15,12 +15,12 @@ public class Sms implements GenerateAndCheck{
     private CodesRepository codesRepository;
 
     @Autowired
-    private SmsGate smsGate;
+    private SmsByOperator smsByOperator;
 
     @Override
     public int generateCode(String phone){
         String code = createCode();
-        int smsSend = smsGate.sendSms(phone, code);
+        int smsSend = smsByOperator.sendSmsByOperator("+7"+phone, code);
         if (smsSend == 0) {
             codesRepository.save(new Codes(phone, code, 0));
             return 0;

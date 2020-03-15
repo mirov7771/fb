@@ -30,8 +30,16 @@ public class FBConfig {
     private String smsLogin;
     @Value("${spring.sms.password}")
     private String smsPassword;
-    @Value("${spring.sms.url}")
-    private String smsUrl;
+    @Value("${spring.sms.sendUrl}")
+    private String smsSendUrl;
+    @Value("${spring.sms.checkUrl}")
+    private String smsCheckUrl;
+    @Value("${spring.sms.prostorUrl}")
+    private String smsProstorUrl;
+    @Value("${spring.sms.prostorLogin}")
+    private String smsProstorLogin;
+    @Value("${spring.sms.prostorPassword}")
+    private String smsProstorPassword;
     @Value("${spring.mail.host}")
     private String host;
     @Value("${spring.mail.username}")

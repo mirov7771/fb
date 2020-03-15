@@ -60,7 +60,7 @@ public class OrderInsert {
                 Long dbOrderId = draft(order, attrs);
                 int status = dbOrderId == null ? 1 : 0;
                 res.put(Fields.PROPERTY_ORDER_ID.getFieldName(), dbOrderId);
-                res.put(Fields.PROPERTY_STATUS.getFieldName(), 0);
+                res.put(Fields.PROPERTY_STATUS.getFieldName(), status);
             }
         }
         return res;
